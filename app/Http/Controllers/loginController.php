@@ -33,4 +33,14 @@ class LoginController extends Controller
         // Arahkan user ke halaman welcome setelah berhasil login
         return redirect()->route('welcome');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
 }
