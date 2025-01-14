@@ -66,7 +66,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Daftar Barang</a>
+                        <a class="collapse-item" href="{{ route('daftar-barang.index')}}">Daftar Barang</a>
                         <a class="collapse-item" href="cards.html">Penerimaan Barang</a>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
+                    {{-- <!-- Topbar Search -->
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -159,7 +159,10 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 text-gray-900 ml-md-3 my-2 my-md-0">@yield('title')</h1>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -311,7 +314,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@yield('username')</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('asset') }}/dist/img/undraw_profile.svg">
                             </a>
@@ -346,9 +349,8 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
+                    {{-- main content --}}
+                    @yield('content')
                 </div>
                 <!-- /.container-fluid -->
 

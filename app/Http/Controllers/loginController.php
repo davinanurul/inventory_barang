@@ -20,18 +20,18 @@ class LoginController extends Controller
         // Cari user berdasarkan user_nama
         $user = User::where('user_nama', $request->user_nama)->first();
 
-        // Verifikasi apakah user ada dan cocokkan password dengan MD5
-        if (!$user || md5($request->user_pass) != $user->user_pass) {
-            return response()->json([
-                'message' => 'Username atau password salah'
-            ], 401);
+        // Verifikasi apakah user ada dan cocokkan password
+        if (!$user || !Hash::check($request->user_pass, $user->user_pass)) {
+            return back()->withErrors([
+                'user_nama' => 'Username atau password salah.',
+            ]);
         }
 
-        // Jika user ditemukan dan password cocok, login user
+        // Login user jika validasi berhasil
         Auth::login($user);
 
-        // Arahkan user ke halaman welcome setelah berhasil login
-        return redirect()->route('welcome');
+        // Redirect ke halaman dashboard setelah login berhasil
+        return redirect()->route('dashboard');
     }
 
     public function logout(Request $request)

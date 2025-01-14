@@ -13,32 +13,31 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'tm_user';
-    
+
     protected $fillable = [
         'user_nama',
         'user_pass',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    // Tentukan kolom primary key jika berbeda dari 'id'
+    protected $primaryKey = 'user_id';  // Kolom utama yang digunakan di tabel Anda
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    // Tentukan kolom yang akan digunakan untuk otentikasi
+    public function getAuthIdentifierName()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return 'user_id';  // Pastikan sesuai dengan kolom ID di tabel Anda
     }
+
+    public function getAuthIdentifier()
+    {
+        return $this->user_id;  // Kolom ID yang digunakan untuk autentikasi
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->user_pass;  // Kolom password yang digunakan
+    }
+
+    // Tentukan kolom 'remember_token' jika Anda ingin menggunakan fitur "remember me"
+    protected $rememberTokenName = 'remember_token';
 }
