@@ -19,10 +19,8 @@ class User extends Authenticatable
         'user_pass',
     ];
 
-    // Tentukan kolom primary key jika berbeda dari 'id'
-    protected $primaryKey = 'user_id';  // Kolom utama yang digunakan di tabel Anda
+    protected $primaryKey = 'user_id';    // Tentukan kolom primary key jika berbeda dari 'id'
 
-    // Tentukan kolom yang akan digunakan untuk otentikasi
     public function getAuthIdentifierName()
     {
         return 'user_id';  // Pastikan sesuai dengan kolom ID di tabel Anda
@@ -38,6 +36,5 @@ class User extends Authenticatable
         return $this->user_pass;  // Kolom password yang digunakan
     }
 
-    // Tentukan kolom 'remember_token' jika Anda ingin menggunakan fitur "remember me"
     protected $rememberTokenName = 'remember_token';
 }

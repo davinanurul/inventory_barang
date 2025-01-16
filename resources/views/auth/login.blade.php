@@ -40,7 +40,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4"><strong>dashboard Back!</strong></h1>
+                                        <h1 class="h4 text-gray-900 mb-4"><strong>Welcome Back!</strong></h1>
                                     </div>
                                     <!-- Login Form -->
                                     <form action="{{ route('login') }}" method="POST" class="user">

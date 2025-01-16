@@ -1,6 +1,5 @@
 @extends('layouts.layout')
 @section('title', 'Dashboard')
-@section('username', $username)
 
 @section('content')
     @if (auth()->check())

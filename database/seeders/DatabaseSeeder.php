@@ -22,6 +22,13 @@ class DatabaseSeeder extends Seeder
                 'user_pass' => Hash::make('user'), // Menggunakan Hash::make untuk bcrypt
                 'user_hak' => 'SU',
                 'user_sts' => '1'
+            ],
+            [
+                'user_id' => '2',
+                'user_nama' => 'admin',
+                'user_pass' => Hash::make('admin'), // Menggunakan Hash::make untuk bcrypt
+                'user_hak' => 'AD',
+                'user_sts' => '1'
             ]
         ]);
     }
