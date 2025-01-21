@@ -29,7 +29,7 @@ class JenisBarangController extends Controller
         $lastBarang = JenisBarang::orderBy('jns_brg_kode', 'desc')->first();
 
         if ($lastBarang) {
-            // Ekstrak angka dari kode barang terakhir, abaikan 'KB'
+            // Ekstrak angka dari kode barang terakhir, abaikan 'JB'
             $lastKodeNumber = intval(substr($lastBarang->jns_brg_kode, 2));
             // Tingkatkan angka
             $newKodeNumber = $lastKodeNumber + 1;
@@ -40,12 +40,12 @@ class JenisBarangController extends Controller
             $newKodeFormatted = '001';
         }
 
-        // Gabungkan dengan prefix 'KB'
-        $kodeBarang = 'JB' . $newKodeFormatted;
+        // Gabungkan dengan prefix 'JB'
+        $jenisKode = 'JB' . $newKodeFormatted;
 
         // Buat entri baru di database
         JenisBarang::create([
-            'jns_brg_kode' => $kodeBarang,
+            'jns_brg_kode' => $jenisKode,
             'jns_brg_nama' => $validated['jns_brg_nama'],
         ]);
 

@@ -2,60 +2,94 @@
 @section('title', 'Daftar Barang')
 
 @section('content')
-    <div class="page-body">
-        <div class="mb-4 d-flex justify-content-between align-items-center">
-            <a href="{{ route('daftar-barang.create') }}" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M12 5l0 14" />
-                    <path d="M5 12l14 0" />
-                </svg>
-                Penerimaan Barang
-            </a>
-        </div>
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Daftar Barang Inventaris</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th class="text-center">KODE</th>
-                                <th class="text-center">JENIS</th>
-                                <th class="text-center">NAMA</th>
-                                <th class="text-center">TGL TERIMA</th>
-                                <th class="text-center">TGL MASUK</th>
-                                <th class="text-center">STATUS</th>
-                                <th class="text-center">AKSI</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>001</td>
-                                <td>ATK</td>
-                                <td>BUKU PAKET</td>
-                                <td>12/20/2025</td>
-                                <td>12/20/2025</td>
-                                <td>Tersedia</td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-warning">
-                                        <span class="icon text-white">
-                                            <i class="fas fa-edit"></i>
-                                        </span>
-                                        <span class="text">Edit</span>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div class="container">
+        <div class="page-body">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Daftar Barang</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">KODE</th>
+                                                <th class="text-center">JENIS</th>
+                                                <th class="text-center">NAMA</th>
+                                                <th class="text-center">TGL TERIMA</th>
+                                                <th class="text-center">TGL MASUK</th>
+                                                <th class="text-center">STATUS</th>
+                                                <th class="text-center">AKSI</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($daftarBarangs as $daftarBarang)
+                                                <tr>
+                                                    <td>{{ $daftarBarang->br_kode }}</td>
+                                                    <td>{{ $daftarBarang->jenisBarang->jns_brg_nama }}</td>
+                                                    <td>{{ $daftarBarang->br_nama }}</td>
+                                                    <td>{{ $daftarBarang->br_tgl_terima }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($daftarBarang->br_tgl_entry)->format('Y-m-d') }}</td>
+                                                    <td>{{ $daftarBarang->br_status }}</td>
+                                                    <td style="width: 20%">
+                                                        <a href="{{ route('daftar-barang.edit', $daftarBarang->br_kode) }}"
+                                                            class="btn btn-small btn-warning">
+                                                            <span class="icon text-white">
+                                                                <i class="fa fa-edit"></i>
+                                                            </span>Edit</a>
+                                                        <form action="{{ route('daftar-barang.destroy', $daftarBarang->br_kode) }}"
+                                                            method="POST" style="display:inline;" class="delete-form">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="btn btn-small btn-danger delete-button">
+                                                                <span class="icon text-white">
+                                                                    <i class="fa fa-trash"></i> Hapus
+                                                                </span></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable(); // Ganti #example dengan ID tabel Anda
+        });
+    </script>
+
+    <!-- SweetAlert Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data ini akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit();
+                    }
+                })
+            });
+        });
+    </script>
 @endsection
