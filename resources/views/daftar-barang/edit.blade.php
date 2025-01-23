@@ -30,9 +30,37 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="br_tgl_terima">Tanggal Terima</label>
+                        <input type="date" name="br_tgl_terima" id="br_tgl_terima"
+                            value="{{ old('br_tgl_terima', $daftarBarang->br_tgl_terima) }}" class="form-control" required>
+                    </div>
+                    <!-- Status Barang -->
+                    <div class="form-group">
+                        <label for="br_status" class="col-form-label">Status Barang</label>
+                        <div>
+                            <select class="form-control" id="br_status" name="br_status" required>
+                                <option value="" disabled
+                                    {{ old('br_status', $daftarBarang->br_status) === null ? 'selected' : '' }}>Pilih Status
+                                    Barang</option>
+                                <option value="1"
+                                    {{ old('br_status', $daftarBarang->br_status) == '1' ? 'selected' : '' }}>Barang Kondisi
+                                    Baik</option>
+                                <option value="2"
+                                    {{ old('br_status', $daftarBarang->br_status) == '2' ? 'selected' : '' }}>Barang Rusak,
+                                    Bisa Diperbaiki</option>
+                                <option value="3"
+                                    {{ old('br_status', $daftarBarang->br_status) == '3' ? 'selected' : '' }}>Barang Rusak,
+                                    Tidak Bisa Digunakan</option>
+                                <option value="0"
+                                    {{ old('br_status', $daftarBarang->br_status) == '0' ? 'selected' : '' }}>Barang
+                                    Dihapus dari Sistem</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="text-end mt-4">
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                        <a href="{{ route('daftar-barang.index') }}" class="btn btn-outline-primary me-1">Kembali</a>
+                        <a href="{{ route('daftar-barang.index') }}" class="btn btn-secondary me-1">Kembali</a>
                     </div>
                 </form>
             </div>

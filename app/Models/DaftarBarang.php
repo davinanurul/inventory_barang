@@ -25,19 +25,6 @@ class DaftarBarang extends Model
         'br_status',
     ];
 
-    /**
-     * Mutator untuk default br_status
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (is_null($model->br_status)) {
-                $model->br_status = 0; // Default: tersedia
-            }
-        });
-    }
 
     /**
      * Generate kode barang baru dengan format INV+TAHUN+NO_URUT.
@@ -67,6 +54,19 @@ class DaftarBarang extends Model
         // Gabungkan prefix dengan nomor urut baru
         return $prefix . $formattedNumber;
     }
+
+    public function getStatusKeteranganAttribute()
+    {
+        $statusList = [
+            0 => 'Barang Dihapus dari Sistem',
+            1 => 'Barang Kondisi Baik',
+            2 => 'Barang Rusak, Bisa Diperbaiki',
+            3 => 'Barang Rusak, Tidak Bisa Digunakan',
+        ];
+
+        return $statusList[$this->br_status] ?? 'Status Tidak Diketahui';
+    }
+
 
     public function jenisBarang()
     {

@@ -20,7 +20,7 @@
                 
                 <div class="text-end mt-4">
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{ route('jenis-barang.index') }}" class="btn btn-outline-primary me-1">Kembali</a>
+                    <a href="{{ route('jenis-barang.index') }}" class="btn btn-secondary me-1">Kembali</a>
                 </div>
             </form>
         </div>

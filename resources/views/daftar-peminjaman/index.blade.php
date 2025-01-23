@@ -1,13 +1,14 @@
 @extends('layouts.layout')
-@section('title', 'Daftar Barang')
+@section('title', 'Daftar Peminjaman')
 
 @section('content')
     <div class="container">
         <div class="page-body">
             <div class="col-md-12 col-sm-12 ">
+                <a href="{{ route('daftar-peminjaman.create') }}" class="btn btn-primary mb-3">Buat Peminjaman</a>
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Daftar Barang</h2>
+                        <h2>Daftar Peminjaman</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -17,40 +18,30 @@
                                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">KODE</th>
-                                                <th class="text-center">JENIS</th>
-                                                <th class="text-center">NAMA</th>
-                                                <th class="text-center">TGL TERIMA</th>
-                                                <th class="text-center">TGL MASUK</th>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">USER ID</th>
+                                                <th class="text-center">NO SISWA</th>
+                                                <th class="text-center">NAMA SISWA</th>
+                                                <th class="text-center">TGL PEMINJAMAN</th>
+                                                <th class="text-center">TGL KEMBALI</th>
                                                 <th class="text-center">STATUS</th>
                                                 <th class="text-center">AKSI</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($daftarBarangs as $daftarBarang)
+                                            @foreach ($daftarPeminjamans as $daftarPeminjaman)
                                                 <tr>
-                                                    <td>{{ $daftarBarang->br_kode }}</td>
-                                                    <td>{{ $daftarBarang->jenisBarang->jns_brg_nama }}</td>
-                                                    <td>{{ $daftarBarang->br_nama }}</td>
-                                                    <td>{{ $daftarBarang->br_tgl_terima }}</td>
-                                                    <td>{{ $daftarBarang->br_tgl_entry }}</td>
-                                                    <td>{{ $daftarBarang->status_keterangan }}</td>
-                                                </td>
-                                                    <td style="width: 20%">
-                                                        <a href="{{ route('daftar-barang.edit', $daftarBarang->br_kode) }}"
-                                                            class="btn btn-small btn-warning">
+                                                    <td>{{ $daftarPeminjaman->pb_id }}</td>
+                                                    <td>{{ $daftarPeminjaman->user_id }}</td>
+                                                    <td>{{ $daftarPeminjaman->pb_no_siswa }}</td>
+                                                    <td>{{ $daftarPeminjaman->pb_nama_siswa }}</td>
+                                                    <td>{{ $daftarPeminjaman->pb_tgl }}</td>
+                                                    <td>{{ $daftarPeminjaman->pb_harus_kembali_tgl }}</td>
+                                                    <td>{{ $daftarPeminjaman->pb_stat }}</td>
+                                                    <td style="width: 5%"><a href="{{ route('daftar-peminjaman.edit', $daftarPeminjaman->pb_id) }}" class="btn btn-small btn-warning" title="Edit">
                                                             <span class="icon text-white">
                                                                 <i class="fa fa-edit"></i>
-                                                            </span>Edit</a>
-                                                        <form action="{{ route('daftar-barang.destroy', $daftarBarang->br_kode) }}"
-                                                            method="POST" style="display:inline;" class="delete-form">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="button" class="btn btn-small btn-danger delete-button">
-                                                                <span class="icon text-white">
-                                                                    <i class="fa fa-trash"></i> Hapus
-                                                                </span></button>
-                                                        </form>
+                                                            </span></a>
                                                     </td>
                                                 </tr>
                                             @endforeach

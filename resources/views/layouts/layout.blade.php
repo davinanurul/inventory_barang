@@ -45,8 +45,7 @@
             <div class="col-md-3 left_col menu_fixed">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Inventory
-                                Barang</span></a>
+                        <a href="index.html" class="site_title">Inventory Barang</a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -85,8 +84,8 @@
                                 <li><a><i class="fa fa-desktop"></i>Peminjaman Barang <span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="general_elements.html">Daftar Peminjaman</a></li>
-                                        <li><a href="media_gallery.html">Pengembalian Barang</a></li>
+                                        <li><a href="{{ route('daftar-peminjaman.index') }}">Daftar Peminjaman</a></li>
+                                        <li><a href="#">Pengembalian Barang</a></li>
                                         <li><a href="typography.html">Barang Belum Kembali</a></li>
                                     </ul>
                                 </li>
@@ -100,8 +99,8 @@
                                 <li><a><i class="fa fa-bar-chart-o"></i> Referensi<span
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{ route('jenis-barang.index')}}">Jenis Barang</a></li>
-                                        <li><a href="chartjs2.html">Daftar Pengguna</a></li>
+                                        <li><a href="{{ route('jenis-barang.index') }}">Jenis Barang</a></li>
+                                        <li><a href="{{ route('daftar-pengguna.index')}}">Daftar Pengguna</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -153,8 +152,17 @@
                                         <span>Settings</span>
                                     </a>
                                     <a class="dropdown-item" href="javascript:;">Help</a>
-                                    <a class="dropdown-item" href="login.html"><i
-                                            class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    <!-- Link untuk Logout -->
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out pull-right"></i> Log Out
+                                    </a>
+
+                                    <!-- Formulir untuk Logout -->
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
 

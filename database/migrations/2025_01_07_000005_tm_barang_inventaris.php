@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('user_id', 10)->nullable();
             $table->string('br_nama', 50)->nullable();
             $table->date('br_tgl_terima')->nullable();
-            $table->dateTime('br_tgl_entry')->nullable();
+            $table->date('br_tgl_entry')->nullable();
             $table->char('br_status', 1)->default('0');
             $table->timestamps();
 

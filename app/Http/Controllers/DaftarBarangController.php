@@ -27,11 +27,10 @@ class DaftarBarangController extends Controller
             'jns_brg_kode' => 'required',
             'br_nama' => 'required|string|max:255',
             'br_tgl_terima' => 'required|date',
-            'br_tgl_terima' => 'required|date',
+            'br_status' => 'required|in:0,1,2,3',
         ]);
 
         $validated['user_id'] = Auth::id();
-        $validated['br_status'] = 0;
         $validated['br_tgl_entry'] = now();
 
         // Generate kode barang baru
@@ -56,12 +55,16 @@ class DaftarBarangController extends Controller
         $validated = $request->validate([
             'br_nama' => 'required|string|max:255',
             'jns_brg_kode' => 'required',
+            'br_tgl_terima' => 'required|date',
+            'br_status' => 'required',
         ]);
 
         $daftarBarang = DaftarBarang::where('br_kode', $br_kode)->firstOrFail();
         $daftarBarang->update([
             'br_nama' => $validated['br_nama'],
             'jns_brg_kode' => $validated['jns_brg_kode'],
+            'br_tgl_terima' => $validated['br_tgl_terima'],
+            'br_status' => $validated['br_status'],
         ]);
 
         return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil diperbarui.');
