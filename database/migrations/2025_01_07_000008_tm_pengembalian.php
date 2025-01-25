@@ -14,8 +14,8 @@ return new class extends Migration
         schema::create('tm_pengembalian', function (Blueprint $table){
             $table->string('kembali_id', 20)->primary();
             $table->string('pb_id', 20)->nullable();
-            $table->string('user_id', 10)->nullable();
-            $table->dateTime('kembali_tgl')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->date('kembali_tgl')->nullable();
             $table->string('kembali_sts', 2)->nullable();
             $table->timestamps();
 

@@ -23,6 +23,14 @@
     <!-- Custom Theme Style -->
     <link href="{{ asset('asset') }}/dist/build/css/custom.min.css" rel="stylesheet">
 
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+
     <style>
         #menu_toggle {
             display: flex;
@@ -58,7 +66,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>John Doe</h2>
+                            <h2>{{ Auth::user()->user_nama }}</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -85,7 +93,8 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('daftar-peminjaman.index') }}">Daftar Peminjaman</a></li>
-                                        <li><a href="#">Pengembalian Barang</a></li>
+                                        <li><a href="{{ route('pengembalian-barang.create') }}">Pengembalian Barang</a>
+                                        </li>
                                         <li><a href="typography.html">Barang Belum Kembali</a></li>
                                     </ul>
                                 </li>
@@ -100,7 +109,7 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('jenis-barang.index') }}">Jenis Barang</a></li>
-                                        <li><a href="{{ route('daftar-pengguna.index')}}">Daftar Pengguna</a></li>
+                                        <li><a href="{{ route('daftar-pengguna.index') }}">Daftar Pengguna</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -142,7 +151,8 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('asset') }}/dist/build/images/img.jpg" alt="">John Doe
+                                    <img src="{{ asset('asset') }}/dist/build/images/img.jpg" alt="">
+                                    {{ Auth::user()->user_nama }}
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">

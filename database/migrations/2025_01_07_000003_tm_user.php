@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         schema::create('tm_user', function (Blueprint $table){
-            $table->string('user_id', 10)->primary();
+            $table->id('user_id');
             $table->string('user_nama', 50)->nullable();
             $table->string('user_pass', 60)->nullable();
             $table->string('user_hak', 2)->nullable();
-            $table->string('user_sts', 2)->nullable();
+            $table->boolean('user_sts')->default(1); // Menggunakan tipe boolean dan default aktif
             $table->timestamps();
         });
     }

@@ -17,6 +17,8 @@ class User extends Authenticatable
     protected $fillable = [
         'user_nama',
         'user_pass',
+        'user_hak',
+        'user_sts',
     ];
 
     protected $primaryKey = 'user_id';    // Tentukan kolom primary key jika berbeda dari 'id'

@@ -6,6 +6,7 @@ use App\Http\Controllers\DaftarPenggunaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengembalianController;
 use App\Models\DaftarPeminjaman;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Route Daftar Pengguna
     Route::get('daftar-pengguna', [DaftarPenggunaController::class, 'index'])->name('daftar-pengguna.index');
+    Route::get('daftar-pengguna/create', [DaftarPenggunaController::class, 'create'])->name('daftar-pengguna.create');
+    Route::post('daftar-pengguna', [DaftarPenggunaController::class, 'store'])->name('daftar-pengguna.store');
+
+    // Route Pengembalian Barang
+    Route::get('pengembalian-barang', [PengembalianController::class, 'create'])->name('pengembalian-barang.create');
 });
 
 // Route untuk Login
