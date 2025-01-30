@@ -72,4 +72,9 @@ class DaftarBarang extends Model
     {
         return $this->belongsTo(JenisBarang::class, 'jns_brg_kode', 'jns_brg_kode');
     }
+
+    public function peminjamanBarang()
+    {
+        return $this->hasMany(DetailPeminjaman::class, 'br_kode', 'br_kode');
+    }
 }

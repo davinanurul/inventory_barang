@@ -35,7 +35,6 @@
                                                     <td>{{ $daftarBarang->br_tgl_terima }}</td>
                                                     <td>{{ $daftarBarang->br_tgl_entry }}</td>
                                                     <td>{{ $daftarBarang->status_keterangan }}</td>
-                                                </td>
                                                     <td style="width: 20%">
                                                         <a href="{{ route('daftar-barang.edit', $daftarBarang->br_kode) }}"
                                                             class="btn btn-small btn-warning">

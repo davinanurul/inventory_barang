@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="jns_brg_kode">Jenis Barang</label>
                         <select class="form-control jenis-barang" id="jns_brg_kode" name="jns_brg_kode" required>
-                            {{-- <option value="">Pilih Jenis Barang</option> --}}
+                            <option value="" disabled selected>Pilih Jenis Barang</option>
                             @foreach ($jenisBarang as $jenisBarang)
                                 <option value="{{ $jenisBarang->jns_brg_kode }}" aria-placeholder="Pilih Jenis Barang">
                                     {{ $jenisBarang->jns_brg_nama }}

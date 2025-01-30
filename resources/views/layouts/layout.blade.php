@@ -17,19 +17,21 @@
     <!-- NProgress -->
     <link href="{{ asset('asset') }}/dist/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- jQuery custom content scroller -->
-    <link href="{{ asset('asset') }}/dist/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css"
-        rel="stylesheet" />
-
+    <link href="{{ asset('asset') }}/dist/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
     <!-- Custom Theme Style -->
     <link href="{{ asset('asset') }}/dist/build/css/custom.min.css" rel="stylesheet">
-
     <!-- SweetAlert2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    <!-- jQuery -->
+    <!-- jQuery (Hanya Sekali) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-
+    <!-- Bootstrap Bundle JS (Termasuk Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <style>
         #menu_toggle {
@@ -93,9 +95,9 @@
                                             class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="{{ route('daftar-peminjaman.index') }}">Daftar Peminjaman</a></li>
-                                        <li><a href="{{ route('pengembalian-barang.create') }}">Pengembalian Barang</a>
+                                        <li><a href="{{ route('pengembalian.create') }}">Pengembalian Barang</a>
                                         </li>
-                                        <li><a href="typography.html">Barang Belum Kembali</a></li>
+                                        <li><a href="{{ route('pengembalian.belumKembali') }}">Barang Belum Kembali</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-table"></i> Laporan <span class="fa fa-chevron-down"></span></a>

@@ -45,7 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/aktifkan-akun/{userId}', [DaftarPenggunaController::class, 'aktifkanAkun'])->name('user.aktifkan');
 
     // Route Pengembalian Barang
-    Route::get('pengembalian-barang', [PengembalianController::class, 'create'])->name('pengembalian-barang.create');
+    Route::get('pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
+    Route::post('pengembalian/store', [PengembalianController::class, 'store'])->name('pengembalian.store');
+    Route::get('pengembalian/belum-kembali', [PengembalianController::class, 'belumKembali'])->name('pengembalian.belumKembali');
+
 });
 
 // Route untuk Login
