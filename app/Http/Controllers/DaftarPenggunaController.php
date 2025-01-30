@@ -36,4 +36,22 @@ class DaftarPenggunaController extends Controller
 
         return redirect()->route('daftar-pengguna.index')->with('success', 'Pengguna berhasil ditambahkan.');
     }
+
+    public function nonaktifkanAkun($userId)
+    {
+        $user = User::findOrFail($userId);
+        $user->user_sts = false;
+        $user->save();
+
+        return redirect()->route('daftar-pengguna.index')->with('success', 'Akun berhasil dinonaktifkan');
+    }
+
+    public function aktifkanAkun($userId)
+    {
+        $user = User::findOrFail($userId);
+        $user->user_sts = true;
+        $user->save();
+
+        return redirect()->route('daftar-pengguna.index')->with('success', 'Akun berhasil diaktifkan');
+    }
 }

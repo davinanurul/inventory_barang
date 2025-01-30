@@ -41,11 +41,18 @@
                                             <td>{{ $daftarPengguna->user_hak }}</td>
                                             <td>{{ $daftarPengguna->user_sts ? 'Aktif' : 'Nonaktif' }}</td>
                                             <td style="width: 10%">
-                                                <a href="#"
-                                                    class="btn btn-small btn-danger">
-                                                    <span class="icon text-white">
-                                                    </span>Nonaktifkan</a>
-                                            </td>
+                                                @if ($daftarPengguna->user_sts)
+                                                    <button class="btn btn-small btn-danger" 
+                                                            onclick="confirmDeactivation({{ $daftarPengguna->user_id }}, 'nonaktifkan')">
+                                                        Nonaktifkan
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-small btn-success" 
+                                                            onclick="confirmDeactivation({{ $daftarPengguna->user_id }}, 'aktifkan')">
+                                                        Aktifkan
+                                                    </button>
+                                                @endif
+                                            </td>                                                                                                                                
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -56,5 +63,39 @@
             </div>
         </div>
     </div>
-    </div>
+
+    <script>
+        function confirmDeactivation(userId, action) {
+            let title, text, confirmButtonText;
+    
+            if (action === 'nonaktifkan') {
+                title = 'Konfirmasi Aktifkan Akun';
+                text = 'Apakah Anda yakin ingin mengaktifkan akun ini?';
+                confirmButtonText = 'Ya, Aktifkan';
+            } else if (action === 'aktifkan') {
+                title = 'Konfirmasi Nonaktifkan Akun';
+                text = 'Apakah Anda yakin ingin menonaktifkan akun ini?';
+                confirmButtonText = 'Ya, Nonaktifkan';
+            }
+    
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: confirmButtonText,
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (action === 'nonaktifkan') {
+                        window.location.href = '/nonaktifkan-akun/' + userId;
+                    } else if (action === 'aktifkan') {
+                        window.location.href = '/aktifkan-akun/' + userId;
+                    }
+                }
+            });
+        }
+    </script>     
 @endsection

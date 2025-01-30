@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('daftar-pengguna', [DaftarPenggunaController::class, 'index'])->name('daftar-pengguna.index');
     Route::get('daftar-pengguna/create', [DaftarPenggunaController::class, 'create'])->name('daftar-pengguna.create');
     Route::post('daftar-pengguna', [DaftarPenggunaController::class, 'store'])->name('daftar-pengguna.store');
+    Route::get('/nonaktifkan-akun/{userId}', [DaftarPenggunaController::class, 'nonaktifkanAkun'])->name('user.nonaktifkan');
+    Route::get('/aktifkan-akun/{userId}', [DaftarPenggunaController::class, 'aktifkanAkun'])->name('user.aktifkan');
 
     // Route Pengembalian Barang
     Route::get('pengembalian-barang', [PengembalianController::class, 'create'])->name('pengembalian-barang.create');
