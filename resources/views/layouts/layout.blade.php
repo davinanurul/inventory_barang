@@ -17,7 +17,8 @@
     <!-- NProgress -->
     <link href="{{ asset('asset') }}/dist/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- jQuery custom content scroller -->
-    <link href="{{ asset('asset') }}/dist/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <link href="{{ asset('asset') }}/dist/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css"
+        rel="stylesheet" />
     <!-- Custom Theme Style -->
     <link href="{{ asset('asset') }}/dist/build/css/custom.min.css" rel="stylesheet">
     <!-- SweetAlert2 CSS -->
@@ -84,39 +85,45 @@
                                         <i class="fa fa-home"></i> Home
                                     </a>
                                 </li>
-                                <li><a><i class="fa fa-cube"></i> Barang Inventaris <span
-                                            class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="{{ route('daftar-barang.index') }}">Daftar Barang</a></li>
-                                        <li><a href="{{ route('daftar-barang.create') }}">Penerimaan Barang</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-desktop"></i>Peminjaman Barang <span
-                                            class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="{{ route('daftar-peminjaman.index') }}">Daftar Peminjaman</a></li>
-                                        <li><a href="{{ route('pengembalian.create') }}">Pengembalian Barang</a>
-                                        </li>
-                                        <li><a href="{{ route('pengembalian.belumKembali') }}">Barang Belum Kembali</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-table"></i> Laporan <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="tables.html">Laporan Daftar Barang</a></li>
-                                        <li><a href="tables_dynamic.html">Laporan Pengembalian Barang</a></li>
-                                        <li><a href="tables_dynamic.html">Laporan Status Barang</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-bar-chart-o"></i> Referensi<span
-                                            class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="{{ route('jenis-barang.index') }}">Jenis Barang</a></li>
-                                        <li><a href="{{ route('daftar-pengguna.index') }}">Daftar Pengguna</a></li>
-                                    </ul>
-                                </li>
+                                @if (auth()->user()->user_hak != 'ad')
+                                    <li><a><i class="fa fa-cube"></i> Barang Inventaris <span
+                                                class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{ route('daftar-barang.index') }}">Daftar Barang</a></li>
+                                            <li><a href="{{ route('daftar-barang.create') }}">Penerimaan Barang</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-desktop"></i>Peminjaman Barang <span
+                                                class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{ route('daftar-peminjaman.index') }}">Daftar Peminjaman</a>
+                                            </li>
+                                            <li><a href="{{ route('pengembalian.create') }}">Pengembalian Barang</a>
+                                            </li>
+                                            <li><a href="{{ route('pengembalian.belumKembali') }}">Barang Belum
+                                                    Kembali</a></li>
+                                        </ul>
+                                    </li>
+                                @endif
+                                @if (auth()->user()->user_hak != 'us')
+                                    <li><a><i class="fa fa-table"></i> Laporan <span
+                                                class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="tables.html">Laporan Daftar Barang</a></li>
+                                            <li><a href="tables_dynamic.html">Laporan Pengembalian Barang</a></li>
+                                            <li><a href="tables_dynamic.html">Laporan Status Barang</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-bar-chart-o"></i> Referensi<span
+                                                class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{ route('jenis-barang.index') }}">Jenis Barang</a></li>
+                                            <li><a href="{{ route('daftar-pengguna.index') }}">Daftar Pengguna</a></li>
+                                        </ul>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
-
                     </div>
                     <!-- /sidebar menu -->
 

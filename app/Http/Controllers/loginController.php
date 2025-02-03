@@ -20,10 +20,10 @@ class LoginController extends Controller
         // Cari user berdasarkan user_nama
         $user = User::where('user_nama', $request->user_nama)->first();
 
-        // Verifikasi apakah user ada dan cocokkan password
-        if (!$user || !Hash::check($request->user_pass, $user->user_pass)) {
+        // Verifikasi apakah user ada, status aktif, dan cocokkan password
+        if (!$user || $user->user_sts == 0 || !Hash::check($request->user_pass, $user->user_pass)) {
             return back()->withErrors([
-                'user_nama' => 'Username atau password salah.',
+                'user_nama' => $user && $user->user_sts == 0 ? 'Akun anda tidak aktif.' : 'Username atau password salah.',
             ]);
         }
 

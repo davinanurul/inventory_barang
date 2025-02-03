@@ -69,13 +69,13 @@
             let title, text, confirmButtonText;
     
             if (action === 'nonaktifkan') {
-                title = 'Konfirmasi Aktifkan Akun';
-                text = 'Apakah Anda yakin ingin mengaktifkan akun ini?';
-                confirmButtonText = 'Ya, Aktifkan';
-            } else if (action === 'aktifkan') {
-                title = 'Konfirmasi Nonaktifkan Akun';
+                title = 'Konfirmasi';
                 text = 'Apakah Anda yakin ingin menonaktifkan akun ini?';
                 confirmButtonText = 'Ya, Nonaktifkan';
+            } else if (action === 'aktifkan') {
+                title = 'Konfirmasi';
+                text = 'Apakah Anda yakin ingin mengaktifkan akun ini?';
+                confirmButtonText = 'Ya, Aktifkan';
             }
     
             Swal.fire({
