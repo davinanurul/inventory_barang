@@ -5,6 +5,8 @@ use App\Http\Controllers\DaftarPeminjamanController;
 use App\Http\Controllers\DaftarPenggunaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisBarangController;
+use App\Http\Controllers\laporanBarangController;
+use App\Http\Controllers\LaporanBarangController as ControllersLaporanBarangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengembalianController;
 use App\Models\DaftarPeminjaman;
@@ -48,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
     Route::post('pengembalian/store', [PengembalianController::class, 'store'])->name('pengembalian.store');
     Route::get('pengembalian/belum-kembali', [PengembalianController::class, 'belumKembali'])->name('pengembalian.belumKembali');
+
+    // Route Laporan
+    Route::get('laporan-barang', [laporanBarangController::class, 'laporanDaftarBarang'])->name('laporan-daftar-barang');
 
 });
 

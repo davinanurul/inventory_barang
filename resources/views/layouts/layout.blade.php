@@ -109,7 +109,7 @@
                                     <li><a><i class="fa fa-table"></i> Laporan <span
                                                 class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="tables.html">Laporan Daftar Barang</a></li>
+                                            <li><a href="{{ route('laporan-daftar-barang')}}">Laporan Daftar Barang</a></li>
                                             <li><a href="tables_dynamic.html">Laporan Pengembalian Barang</a></li>
                                             <li><a href="tables_dynamic.html">Laporan Status Barang</a></li>
                                         </ul>
