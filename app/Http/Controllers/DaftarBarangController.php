@@ -75,6 +75,6 @@ class DaftarBarangController extends Controller
         $daftarBarang = DaftarBarang::findOrFail($id);
         $daftarBarang->delete();
 
-        return redirect()->route('daftar-barang.index')->with('success', 'Jenis Barang berhasil dihapus');
+        return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil dihapus');
     }
 }

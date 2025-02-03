@@ -7,6 +7,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\laporanBarangController;
 use App\Http\Controllers\LaporanBarangController as ControllersLaporanBarangController;
+use App\Http\Controllers\LaporanPengembalianController;
+use App\Http\Controllers\LaporanStatusBarangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengembalianController;
 use App\Models\DaftarPeminjaman;
@@ -53,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Route Laporan
     Route::get('laporan-barang', [laporanBarangController::class, 'laporanDaftarBarang'])->name('laporan-daftar-barang');
+    Route::get('laporan-pengembalian', [LaporanPengembalianController::class, 'laporanPengembalianBarang'])->name('laporan-pengembalian-barang');
+    Route::get('laporan-status-barang', [LaporanStatusBarangController::class, 'laporanStatusBarang'])->name('laporan-status-barang');
 
 });
 

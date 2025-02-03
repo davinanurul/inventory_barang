@@ -110,8 +110,8 @@
                                                 class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{ route('laporan-daftar-barang')}}">Laporan Daftar Barang</a></li>
-                                            <li><a href="tables_dynamic.html">Laporan Pengembalian Barang</a></li>
-                                            <li><a href="tables_dynamic.html">Laporan Status Barang</a></li>
+                                            <li><a href="{{ route('laporan-pengembalian-barang')}}">Laporan Pengembalian Barang</a></li>
+                                            <li><a href="{{ route('laporan-status-barang')}}">Laporan Status Barang</a></li>
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-bar-chart-o"></i> Referensi<span
