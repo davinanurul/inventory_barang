@@ -38,9 +38,10 @@ class DaftarBarang extends Model
         $prefix = 'INV' . $currentYear;
 
         // Ambil kode barang terakhir yang dimulai dengan prefix
-        $lastKode = self::where('br_kode', 'like', "$prefix%")
-            ->orderBy('br_kode', 'desc')
-            ->value('br_kode');
+        $lastKode = self::withTrashed() // Mengambil semua data, termasuk yang soft delete
+        ->where('br_kode', 'like', "$prefix%")
+        ->orderBy('br_kode', 'desc')
+        ->value('br_kode');
 
         if ($lastKode) {
             // Ambil nomor urut terakhir dari kode barang

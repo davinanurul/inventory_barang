@@ -40,7 +40,6 @@
                                 <option value="1">Barang Kondisi Baik</option>
                                 <option value="2">Barang Rusak, Bisa Diperbaiki</option>
                                 <option value="3">Barang Rusak, Tidak Bisa Digunakan</option>
-                                <option value="0">Barang Dihapus dari Sistem</option>
                             </select>
                         </div>
                     </div>
