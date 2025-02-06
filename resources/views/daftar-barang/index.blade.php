@@ -11,7 +11,6 @@
                             <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Barang Aktif</option>
                             <option value="deleted" {{ $filter == 'deleted' ? 'selected' : '' }}>Barang Terhapus</option>
                             <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Barang</option>
-                            <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Barang</option>
                         </select>
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                                                                 method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('PATCH')
-                                                                <button type="submit" class="btn btn-small btn-primary w-100">
+                                                                <button type="submit" class="btn btn-small btn-primary restore-button w-100">
                                                                     <span class="icon text-white">
                                                                         <i class="fa fa-undo"></i> Pulihkan
                                                                     </span>
@@ -120,7 +119,6 @@
             button.addEventListener('click', function() {
                 Swal.fire({
                     title: 'Apakah Anda yakin?',
-                    text: "Data ini akan dihapus dari daftar barang!",
                     text: "Data ini akan dihapus dari daftar barang!",
                     icon: 'warning',
                     showCancelButton: true,
