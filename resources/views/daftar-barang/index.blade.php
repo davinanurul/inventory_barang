@@ -11,6 +11,7 @@
                             <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Barang Aktif</option>
                             <option value="deleted" {{ $filter == 'deleted' ? 'selected' : '' }}>Barang Terhapus</option>
                             <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Barang</option>
+                            <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Barang</option>
                         </select>
                     </div>
                 </div>
@@ -110,10 +111,16 @@
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        document.getElementById('filter-barang').addEventListener('change', function() {
+            let filter = this.value;
+            window.location.href = "{{ route('daftar-barang.index') }}?filter=" + filter;
+        });
+        
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', function() {
                 Swal.fire({
                     title: 'Apakah Anda yakin?',
+                    text: "Data ini akan dihapus dari daftar barang!",
                     text: "Data ini akan dihapus dari daftar barang!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -128,13 +135,26 @@
                 });
             });
         });
-    </script>
-    
-    <script>
-        document.getElementById('filter-barang').addEventListener('change', function() {
-            let filter = this.value;
-            window.location.href = "{{ route('daftar-barang.index') }}?filter=" + filter;
+
+        document.querySelectorAll('.restore-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Mencegah form submit langsung
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Barang ini akan dipulihkan kembali!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, pulihkan!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit(); // Submit form jika konfirmasi diterima
+                    }
+                });
+            });
         });
     </script>
-
 @endsection
