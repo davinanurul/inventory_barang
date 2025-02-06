@@ -98,7 +98,7 @@
                                         <ul class="nav child_menu">
                                             <li><a href="{{ route('daftar-peminjaman.index') }}">Daftar Peminjaman</a>
                                             </li>
-                                            <li><a href="{{ route('pengembalian.create') }}">Pengembalian Barang</a>
+                                            <li><a href="{{ route('pengembalian.index') }}">Pengembalian Barang</a>
                                             </li>
                                             <li><a href="{{ route('pengembalian.belumKembali') }}">Barang Belum
                                                     Kembali</a></li>

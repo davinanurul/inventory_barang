@@ -16,17 +16,17 @@
                     <div class="form-group">
                         <label for="pb_no_siswa">No Siswa</label>
                         <input type="number" name="pb_no_siswa" id="pb_no_siswa"
-                        value="{{ old('pb_no_siswa', $daftarPeminjaman->pb_no_siswa) }}" class="form-control" required>
+                        value="{{ old('pb_no_siswa', $daftarPeminjaman->pb_no_siswa) }}" class="form-control" required disabled>
                     </div>
                     <div class="form-group">
                         <label for="pb_nama_siswa">Nama Siswa</label>
                         <input type="text" name="pb_nama_siswa" id="pb_nama_siswa" 
-                        value="{{ old('pb_nama_siswa', $daftarPeminjaman->pb_nama_siswa) }}" class="form-control" required>
+                        value="{{ old('pb_nama_siswa', $daftarPeminjaman->pb_nama_siswa) }}" class="form-control" required disabled>
                     </div>
                     <div class="form-group">
                         <label for="pb_tgl">Tanggal Peminjaman</label>
                         <input type="date" name="pb_tgl" id="pb_tgl" 
-                        value="{{ old('pb_tgl', $daftarPeminjaman->pb_tgl) }}" class="form-control" required>
+                        value="{{ old('pb_tgl', $daftarPeminjaman->pb_tgl) }}" class="form-control" required disabled>
                     </div>
                     <div class="form-group">
                         <label for="pb_harus_kembali_tgl">Tanggal Harus Kembali</label>
@@ -37,7 +37,7 @@
                     <!-- Select Barang -->
                     <div class="form-group">
                         <label for="br_nama">Pilih Barang</label>
-                        <select class="form-control" id="br_nama" name="br_nama" required>
+                        <select class="form-control" id="br_nama" name="br_nama" required disabled>
                             <option value="">Pilih Barang</option>
                             @foreach ($daftarBarangs as $daftarBarang)
                                 <option value="{{ $daftarBarang->br_kode }}" 

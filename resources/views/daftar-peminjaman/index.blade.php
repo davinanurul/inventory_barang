@@ -37,11 +37,30 @@
                                                     <td>{{ $daftarPeminjaman->pb_nama_siswa }}</td>
                                                     <td>{{ $daftarPeminjaman->pb_tgl }}</td>
                                                     <td>{{ $daftarPeminjaman->pb_harus_kembali_tgl }}</td>
-                                                    <td>{{ $daftarPeminjaman->pb_stat }}</td>
-                                                    <td style="width: 5%"><a href="{{ route('daftar-peminjaman.edit', $daftarPeminjaman->pb_id) }}" class="btn btn-small btn-warning" title="Edit">
-                                                            <span class="icon text-white">
-                                                                <i class="fa fa-edit"></i>
-                                                            </span></a>
+                                                    <td>{{ $daftarPeminjaman->status_peminjaman }}</td>
+                                                    <td class="text-center" style="width: 5%">
+                                                        <div class="btn-group w-100">
+                                                            @if ($daftarPeminjaman->detailPeminjaman && $daftarPeminjaman->detailPeminjaman->pdb_sts == 0)
+                                                                <a href="{{ route('daftar-peminjaman.detail', $daftarPeminjaman->pb_id) }}"
+                                                                    class="btn btn-small btn-success w-100" title="Detail">
+                                                                    <span class="icon text-white">Lihat Detail</span>
+                                                                </a>
+                                                            @elseif ($daftarPeminjaman->detailPeminjaman && $daftarPeminjaman->detailPeminjaman->pdb_sts == 1)
+                                                                <div class="btn-group w-100">
+                                                                    <a href="{{ route('pengembalian.create', ['pb_id' => $daftarPeminjaman->pb_id]) }}" 
+                                                                        class="btn btn-small btn-success" title="Kembali">
+                                                                         <span class="icon text-white">Kembali</span>
+                                                                     </a>                                                                                                                                         
+                                                                    <a href="{{ route('daftar-peminjaman.edit', $daftarPeminjaman->pb_id) }}"
+                                                                        class="btn btn-small btn-warning"
+                                                                        title="Edit">
+                                                                        <span class="icon text-white">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
+                                                            @endif
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach

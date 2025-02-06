@@ -52,10 +52,25 @@ class DaftarPeminjaman extends Model
         return sprintf('PJ%s%s%04d', $tahun, $bulan, $noUrut);
     }
 
+    public function getStatusPeminjamanAttribute()
+    {
+        $statusList = [
+            0 => 'Peminjaman dihapus dari system',
+            1 => 'Pemjaman aktif',
+        ];
+
+        return $statusList[$this->pb_stat] ?? 'Status Tidak Diketahui';
+    }
+
 
     // Relasi ke tabel tm_user (jika diperlukan)
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+
+    public function detailPeminjaman()
+    {
+        return $this->hasOne(DetailPeminjaman::class, 'pb_id', 'pb_id');
     }
 }

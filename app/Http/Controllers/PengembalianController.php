@@ -10,13 +10,19 @@ use Illuminate\Support\Facades\DB;
 
 class PengembalianController extends Controller
 {
-    public function create()
+    public function index()
+    {
+        $pengembalians = Pengembalian::with('peminjaman')->get();
+        return view('pengembalian.index', compact('pengembalians'));
+    }
+
+    public function create(Request $request)
     {
         $peminjaman = DaftarPeminjaman::all();
         $barangPinjaman = DetailPeminjaman::with('barangInventaris')
             ->get();
-
-        return view('pengembalian.create', compact('peminjaman', 'barangPinjaman'));
+        $selectedPbId = $request->pb_id;
+        return view('pengembalian.create', compact('peminjaman', 'barangPinjaman', 'selectedPbId'));
     }
 
 
@@ -43,7 +49,7 @@ class PengembalianController extends Controller
             ->where('pb_id', $request->pb_id)
             ->update(['pdb_sts' => 0]);
 
-        return redirect()->route('pengembalian.create')->with('success', 'Barang berhasil dikembalikan.');
+        return redirect()->route('pengembalian.index')->with('success', 'Barang berhasil dikembalikan.');
     }
 
     public function belumKembali()

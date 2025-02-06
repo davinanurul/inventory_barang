@@ -11,6 +11,22 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        <!-- Filter Form -->
+                        <form action="#" method="GET" class="mb-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select name="status" class="form-control" onchange="this.form.submit()">
+                                        <option value="">Pilih Status Barang</option>
+                                        <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Baik
+                                        </option>
+                                        <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Rusak, dapat
+                                            diperbaiki</option>
+                                        <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Rusak, tidak
+                                            dapat digunakan</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
@@ -26,16 +42,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($laporanStatusBarang as $statusBarang)
+                                            @forelse ($laporanStatusBarang as $statusBarang)
                                                 <tr>
                                                     <td>{{ $statusBarang->br_kode }}</td>
                                                     <td>{{ $statusBarang->jenisBarang->jns_brg_nama }}</td>
                                                     <td>{{ $statusBarang->br_nama }}</td>
                                                     <td>{{ $statusBarang->br_tgl_terima }}</td>
                                                     <td>{{ $statusBarang->br_tgl_entry }}</td>
-                                                    <td>{{ $statusBarang->status_keterangan }}</td>
+                                                    <td>
+                                                        @if ($statusBarang->br_status == 1)
+                                                            Baik
+                                                        @elseif($statusBarang->br_status == 2)
+                                                            Rusak, dapat diperbaiki
+                                                        @elseif($statusBarang->br_status == 3)
+                                                            Rusak, tidak dapat digunakan
+                                                        @else
+                                                            Tidak diketahui
+                                                        @endif
+                                                    </td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <tr>
+                                                    <td colspan="7" class="text-center">Tidak ada barang dengan status
+                                                        yang dipilih.</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

@@ -52,4 +52,14 @@ class Pengembalian extends Model
 
         return "KB$tahun$bulan$newNumber";
     }
+
+    public function getStatusPengembalianAttribute()
+    {
+        $statusList = [
+            0 => 'Barang Baik',
+            1 => 'Barang Rusak',
+        ];
+
+        return $statusList[$this->kembali_sts] ?? 'Status Tidak Diketahui';
+    }
 }

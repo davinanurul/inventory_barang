@@ -14,13 +14,8 @@
                     <div class="form-group">
                         <label for="peminjaman">Peminjaman</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="peminjaman_id" name="pb_id" readonly required>
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalPeminjaman">
-                                    Cari
-                                </button>
-                            </div>
+                            <input type="text" class="form-control" id="peminjaman_id" name="pb_id" 
+                                   value="{{ old('pb_id', $selectedPbId ?? '') }}" readonly required>
                         </div>
                     </div>
                     <!-- Tanggal Pengembalian -->
@@ -42,7 +37,7 @@
                     <!-- Tombol -->
                     <div class="text-end mt-4">
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                        <a href="#" class="btn btn-secondary me-1">Kembali</a>
+                        <a href="{{ route('daftar-peminjaman.index')}}" class="btn btn-secondary me-1">Kembali</a>
                     </div>
                 </form>
             </div>

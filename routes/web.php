@@ -6,12 +6,10 @@ use App\Http\Controllers\DaftarPenggunaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\laporanBarangController;
-use App\Http\Controllers\LaporanBarangController as ControllersLaporanBarangController;
 use App\Http\Controllers\LaporanPengembalianController;
 use App\Http\Controllers\LaporanStatusBarangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengembalianController;
-use App\Models\DaftarPeminjaman;
 use Illuminate\Support\Facades\Route;
 
 // Middleware auth untuk melindungi dashboard dan rute lainnya
@@ -40,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('daftar-peminjaman', [DaftarPeminjamanController::class, 'store'])->name('daftar-peminjaman.store');
     Route::get('daftar-peminjaman/{id}/edit', [DaftarPeminjamanController::class, 'edit'])->name('daftar-peminjaman.edit');
     Route::put('daftar-peminjaman/{pb_id}', [DaftarPeminjamanController::class, 'update'])->name('daftar-peminjaman.update');
+    Route::get('daftar-peminjaman/{id}/detail', [DaftarPeminjamanController::class, 'detail'])->name('daftar-peminjaman.detail');
 
     // Route Daftar Pengguna
     Route::get('daftar-pengguna', [DaftarPenggunaController::class, 'index'])->name('daftar-pengguna.index');
@@ -49,7 +48,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/aktifkan-akun/{userId}', [DaftarPenggunaController::class, 'aktifkanAkun'])->name('user.aktifkan');
 
     // Route Pengembalian Barang
-    Route::get('pengembalian', [PengembalianController::class, 'create'])->name('pengembalian.create');
+    Route::get('pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
+    Route::get('pengembalian/create', [PengembalianController::class, 'create'])->name('pengembalian.create');
     Route::post('pengembalian/store', [PengembalianController::class, 'store'])->name('pengembalian.store');
     Route::get('pengembalian/belum-kembali', [PengembalianController::class, 'belumKembali'])->name('pengembalian.belumKembali');
 
