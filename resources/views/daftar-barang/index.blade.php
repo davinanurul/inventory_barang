@@ -10,7 +10,7 @@
                         <select id="filter-barang" class="form-control">
                             <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Barang Aktif</option>
                             <option value="deleted" {{ $filter == 'deleted' ? 'selected' : '' }}>Barang Terhapus</option>
-                            {{-- <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Barang</option> --}}
+                            <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Barang</option>
                         </select>
                     </div>
                 </div>
@@ -52,15 +52,16 @@
                                                                 method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('PATCH')
-                                                                <button type="submit" class="btn btn-small btn-success">
+                                                                <button type="button"
+                                                                    class="btn btn-small btn-primary restore-button w-100">
                                                                     <span class="icon text-white">
                                                                         <i class="fa fa-undo"></i> Pulihkan
                                                                     </span>
                                                                 </button>
                                                             </form>
                                                         @else
-                                                            {{-- Jika barang belum dihapus, tampilkan tombol Edit & Hapus dalam satu grup --}}
-                                                            <div class="btn-group" role="group">
+                                                            {{-- Tombol Edit & Hapus jika barang belum dihapus --}}
+                                                            <div class="btn-group w-100" role="group">
                                                                 <a href="{{ route('daftar-barang.edit', $daftarBarang->br_kode) }}"
                                                                     class="btn btn-small btn-warning">
                                                                     <i class="fa fa-edit"></i> Edit
@@ -110,11 +111,16 @@
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        document.getElementById('filter-barang').addEventListener('change', function() {
+            let filter = this.value;
+            window.location.href = "{{ route('daftar-barang.index') }}?filter=" + filter;
+        });
+        
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', function() {
                 Swal.fire({
                     title: 'Apakah Anda yakin?',
-                    text: "Data ini akan dihapus secara permanen!",
+                    text: "Data ini akan dihapus dari daftar barang!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -128,13 +134,26 @@
                 });
             });
         });
-    </script>
-    
-    <script>
-        document.getElementById('filter-barang').addEventListener('change', function() {
-            let filter = this.value;
-            window.location.href = "{{ route('daftar-barang.index') }}?filter=" + filter;
+
+        document.querySelectorAll('.restore-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Mencegah form submit langsung
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Barang ini akan dipulihkan kembali!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, pulihkan!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit(); // Submit form jika konfirmasi diterima
+                    }
+                });
+            });
         });
     </script>
-
 @endsection

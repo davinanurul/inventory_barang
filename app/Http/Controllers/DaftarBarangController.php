@@ -89,7 +89,11 @@ class DaftarBarangController extends Controller
         $pernahDipinjam = DetailPeminjaman::where('br_kode', $barang->br_kode)->exists();
 
         if ($pernahDipinjam) {
-            // Jika pernah dipinjam, lakukan soft delete
+            // Jika pernah dipinjam, ubah status menjadi 0 sebelum soft delete
+            $barang->br_status = 0;
+            $barang->save();
+
+            // Soft delete
             $barang->delete();
         } else {
             // Jika belum pernah dipinjam, lakukan hard delete
@@ -104,7 +108,10 @@ class DaftarBarangController extends Controller
     {
         $daftarBarang = DaftarBarang::withTrashed()->findOrFail($id);
         $daftarBarang->restore();
-
+        
+        $daftarBarang->br_status = 1;
+        $daftarBarang->save();
+        
         return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil dipulihkan.');
     }
 
