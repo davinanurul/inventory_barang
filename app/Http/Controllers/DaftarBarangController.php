@@ -3,17 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\DaftarBarang;
+use App\Models\DetailPeminjaman;
 use App\Models\JenisBarang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DaftarBarangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $daftarBarangs = DaftarBarang::all();
-        return view('daftar-barang.index', compact('daftarBarangs'));
+        $filter = $request->input('filter', 'active'); // Default filter menampilkan barang yang tidak dihapus
+
+        if ($filter === 'deleted') {
+            $daftarBarangs = DaftarBarang::onlyTrashed()->get(); // Menampilkan hanya barang yang sudah dihapus
+        } elseif ($filter === 'all') {
+            $daftarBarangs = DaftarBarang::withTrashed()->get(); // Menampilkan semua barang (termasuk yang dihapus)
+        } else {
+            $daftarBarangs = DaftarBarang::all(); // Default: hanya menampilkan barang yang tidak dihapus
+        }
+
+        return view('daftar-barang.index', compact('daftarBarangs', 'filter'));
     }
+
 
     public function create()
     {
@@ -72,9 +83,36 @@ class DaftarBarangController extends Controller
 
     public function destroy($id)
     {
-        $daftarBarang = DaftarBarang::findOrFail($id);
-        $daftarBarang->delete();
+        $barang = DaftarBarang::findOrFail($id);
 
-        return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil dihapus');
+        // Periksa apakah barang ini pernah dipinjam
+        $pernahDipinjam = DetailPeminjaman::where('br_kode', $barang->br_kode)->exists();
+
+        if ($pernahDipinjam) {
+            // Jika pernah dipinjam, lakukan soft delete
+            $barang->delete();
+        } else {
+            // Jika belum pernah dipinjam, lakukan hard delete
+            $barang->forceDelete();
+        }
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus.');
+    }
+
+
+    public function restore($id)
+    {
+        $daftarBarang = DaftarBarang::withTrashed()->findOrFail($id);
+        $daftarBarang->restore();
+
+        return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil dipulihkan.');
+    }
+
+    public function forceDelete($id)
+    {
+        $daftarBarang = DaftarBarang::withTrashed()->findOrFail($id);
+        $daftarBarang->forceDelete();
+
+        return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil dihapus permanen.');
     }
 }

@@ -9,12 +9,12 @@
         <div class="col-md-12 col-sm-12 ">
             <div class="mb-4">
                 <a href="{{ route('jenis-barang.create') }}" class="btn btn-primary">
-                    Jenis Barang
+                    Tambah Jenis Barang
                 </a>
             </div>
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Jenis Barang</h2>
+                    <h2>Tabel Jenis Barang</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -34,13 +34,13 @@
                                             <tr>
                                                 <td>{{ $jenisBarang->jns_brg_kode }}</td>
                                                 <td>{{ $jenisBarang->jns_brg_nama }}</td>
-                                                <td style="width: 20%">
+                                                <td class="text-center" style="width: 12%">
                                                     <a href="{{ route('jenis-barang.edit', $jenisBarang->jns_brg_kode) }}"
                                                         class="btn btn-small btn-warning">
                                                         <span class="icon text-white">
                                                             <i class="fa fa-edit"></i>
                                                         </span>Edit</a>
-                                                    <form action="{{ route('jenis-barang.destroy', $jenisBarang->jns_brg_kode) }}"
+                                                    {{-- <form action="{{ route('jenis-barang.destroy', $jenisBarang->jns_brg_kode) }}"
                                                         method="POST" style="display:inline;" class="delete-form">
                                                         @csrf
                                                         @method('DELETE')
@@ -48,7 +48,7 @@
                                                             <span class="icon text-white">
                                                                 <i class="fa fa-trash"></i> Hapus
                                                             </span></button>
-                                                    </form>
+                                                    </form> --}}
                                                 </td>
                                             </tr>
                                         @endforeach

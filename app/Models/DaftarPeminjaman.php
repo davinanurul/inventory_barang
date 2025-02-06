@@ -55,8 +55,8 @@ class DaftarPeminjaman extends Model
     public function getStatusPeminjamanAttribute()
     {
         $statusList = [
-            0 => 'Peminjaman dihapus dari system',
-            1 => 'Pemjaman aktif',
+            0 => 'Selesai',
+            1 => 'Aktif',
         ];
 
         return $statusList[$this->pb_stat] ?? 'Status Tidak Diketahui';

@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('daftar-barang/{id}/edit', [DaftarBarangController::class, 'edit'])->name('daftar-barang.edit');
     Route::put('daftar-barang/{br_kode}', [DaftarBarangController::class, 'update'])->name('daftar-barang.update');
     Route::delete('daftar-barang/{br_kode}', [DaftarBarangController::class, 'destroy'])->name('daftar-barang.destroy');
+    Route::patch('/daftar-barang/restore/{id}', [DaftarBarangController::class, 'restore'])->name('daftar-barang.restore');
 
     // Route daftar peminjaman
     Route::get('daftar-peminjaman', [DaftarPeminjamanController::class, 'index'])->name('daftar-peminjaman.index');

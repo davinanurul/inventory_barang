@@ -5,6 +5,12 @@
     <div class="container">
         <div class="page-body">
             <div class="col-md-12 col-sm-12 ">
+                <div class="d-flex justify-content-between">
+                    <div></div> <!-- Placeholder jika diperlukan konten di kiri -->
+                    <button class="btn btn-primary mb-4 ms-auto">
+                        <i class="fa fa-print"></i> Print Laporan
+                    </button>
+                </div> 
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Laporan Status Barang</h2>

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 class DaftarBarang extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'tm_barang_inventaris';
 
@@ -24,6 +25,8 @@ class DaftarBarang extends Model
         'br_tgl_entry',
         'br_status',
     ];
+
+    protected $dates = ['deleted_at'];
 
 
     /**

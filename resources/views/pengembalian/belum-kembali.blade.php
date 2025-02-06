@@ -20,6 +20,7 @@
                                             <th class="text-center">KODE</th>
                                             <th class="text-center">JENIS</th>
                                             <th class="text-center">NAMA</th>
+                                            <th class="text-center">ID PEMINJAMAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -28,6 +29,7 @@
                                             <td class="text-center">{{ $barang->barangInventaris->br_kode }}</td>
                                             <td class="text-center">{{ $barang->barangInventaris->jenisBarang->jns_brg_nama }}</td>
                                             <td class="text-center">{{ $barang->barangInventaris->br_nama }}</td>
+                                            <td class="text-center">{{ $barang->pb_id }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

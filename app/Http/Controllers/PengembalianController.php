@@ -12,7 +12,10 @@ class PengembalianController extends Controller
 {
     public function index()
     {
-        $pengembalians = Pengembalian::with('peminjaman')->get();
+        $pengembalians = Pengembalian::with('peminjaman')
+            ->orderByDesc('kembali_id')
+            ->get();
+
         return view('pengembalian.index', compact('pengembalians'));
     }
 
@@ -28,29 +31,35 @@ class PengembalianController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'pb_id' => 'required|exists:tm_peminjaman,pb_id',
-            'kembali_tgl' => 'required|date',
             'kembali_sts' => 'required|in:0,1',
         ]);
 
         $kembali_id = Pengembalian::generateKembaliId();
+        $kembali_tgl = now();
 
+        // Simpan data pengembalian ke tabel `tm_pengembalian`
         Pengembalian::create([
             'kembali_id' => $kembali_id,
             'pb_id' => $request->pb_id,
             'user_id' => auth()->id(),
-            'kembali_tgl' => $request->kembali_tgl,
+            'kembali_tgl' => $kembali_tgl,
             'kembali_sts' => $request->kembali_sts,
         ]);
 
-        // Update status barang di tabel td_peminjaman_barang menjadi 0 (dikembalikan)
         DB::table('td_peminjaman_barang')
             ->where('pb_id', $request->pb_id)
             ->update(['pdb_sts' => 0]);
 
+        DB::table('tm_peminjaman')
+            ->where('pb_id', $request->pb_id)
+            ->update(['pb_stat' => 0]);
+
         return redirect()->route('pengembalian.index')->with('success', 'Barang berhasil dikembalikan.');
     }
+
 
     public function belumKembali()
     {

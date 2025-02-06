@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('br_tgl_entry')->nullable();
             $table->char('br_status', 1);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('jns_brg_kode')->references('jns_brg_kode')->on('tr_jenis_barang');
             $table->foreign('user_id')->references('user_id')->on('tm_user');

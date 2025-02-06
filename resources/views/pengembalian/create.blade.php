@@ -12,16 +12,11 @@
                     @csrf
                     <!-- Input Peminjaman -->
                     <div class="form-group">
-                        <label for="peminjaman">Peminjaman</label>
+                        <label for="peminjaman"> ID Peminjaman</label>
                         <div class="input-group">
                             <input type="text" class="form-control" id="peminjaman_id" name="pb_id" 
                                    value="{{ old('pb_id', $selectedPbId ?? '') }}" readonly required>
                         </div>
-                    </div>
-                    <!-- Tanggal Pengembalian -->
-                    <div class="form-group">
-                        <label for="kembali_tgl">Tanggal Pengembalian</label>
-                        <input type="date" name="kembali_tgl" id="kembali_tgl" class="form-control" required>
                     </div>
                     <!-- Status Barang -->
                     <div class="form-group">

@@ -21,10 +21,6 @@
                         <input type="text" name="pb_nama_siswa" id="pb_nama_siswa" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="pb_tgl">Tanggal Peminjaman</label>
-                        <input type="date" name="pb_tgl" id="pb_tgl" class="form-control" required>
-                    </div>
-                    <div class="form-group">
                         <label for="pb_harus_kembali_tgl">Tanggal Harus Kembali</label>
                         <input type="date" name="pb_harus_kembali_tgl" id="pb_harus_kembali_tgl" class="form-control"
                             required>

@@ -11,14 +11,18 @@ use Illuminate\Support\Facades\Auth;
 class DaftarPeminjamanController extends Controller
 {
     public function index()
-{
-    $daftarPeminjamans = DaftarPeminjaman::with(['detailPeminjaman' => function ($query) {
-        $query->select('pb_id', 'pdb_sts'); // Hanya mengambil pb_id dan pdb_sts
-    }])->get();
+    {
+        $daftarPeminjamans = DaftarPeminjaman::with(['detailPeminjaman' => function ($query) {
+            $query->select('pb_id', 'pdb_sts');
+        }])
+            ->leftJoin('td_peminjaman_barang', 'tm_peminjaman.pb_id', '=', 'td_peminjaman_barang.pb_id')
+            ->orderByRaw('COALESCE(td_peminjaman_barang.pdb_sts, 0) DESC') // Prioritas pdb_sts == 1
+            ->orderBy('tm_peminjaman.pb_tgl', 'DESC') // Urutkan dari terbaru ke terlama
+            ->select('tm_peminjaman.*')
+            ->get();
 
-    return view('daftar-peminjaman.index', compact('daftarPeminjamans'));
-}
-
+        return view('daftar-peminjaman.index', compact('daftarPeminjamans'));
+    }
 
     public function create()
     {
@@ -31,7 +35,6 @@ class DaftarPeminjamanController extends Controller
         $validated = $request->validate([
             'pb_no_siswa' => 'required|string|max:20',
             'pb_nama_siswa' => 'required|string|max:100',
-            'pb_tgl' => 'required|date',
             'pb_harus_kembali_tgl' => 'required|date',
             'br_nama' => 'required',
         ]);
@@ -40,6 +43,7 @@ class DaftarPeminjamanController extends Controller
         $validated['user_id'] = Auth::id();
         $validated['pb_stat'] = 1;
         $validated['created_at'] = now();
+        $validated['pb_tgl'] = now();
 
         // Generate pb_id baru
         $validated['pb_id'] = DaftarPeminjaman::generatePbId();

@@ -5,9 +5,18 @@
     <div class="container">
         <div class="page-body">
             <div class="col-md-12 col-sm-12 ">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <select id="filter-barang" class="form-control">
+                            <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Barang Aktif</option>
+                            <option value="deleted" {{ $filter == 'deleted' ? 'selected' : '' }}>Barang Terhapus</option>
+                            {{-- <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Barang</option> --}}
+                        </select>
+                    </div>
+                </div>
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Daftar Barang</h2>
+                        <h2>Tabel Daftar Barang</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -35,21 +44,39 @@
                                                     <td>{{ $daftarBarang->br_tgl_terima }}</td>
                                                     <td>{{ $daftarBarang->br_tgl_entry }}</td>
                                                     <td>{{ $daftarBarang->status_keterangan }}</td>
-                                                    <td style="width: 20%">
-                                                        <a href="{{ route('daftar-barang.edit', $daftarBarang->br_kode) }}"
-                                                            class="btn btn-small btn-warning">
-                                                            <span class="icon text-white">
-                                                                <i class="fa fa-edit"></i>
-                                                            </span>Edit</a>
-                                                        <form action="{{ route('daftar-barang.destroy', $daftarBarang->br_kode) }}"
-                                                            method="POST" style="display:inline;" class="delete-form">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="button" class="btn btn-small btn-danger delete-button">
-                                                                <span class="icon text-white">
+                                                    <td class="text-center" style="width: 20%">
+                                                        @if ($daftarBarang->deleted_at)
+                                                            {{-- Jika barang sudah dihapus, tampilkan tombol Restore --}}
+                                                            <form
+                                                                action="{{ route('daftar-barang.restore', $daftarBarang->br_kode) }}"
+                                                                method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <button type="submit" class="btn btn-small btn-success">
+                                                                    <span class="icon text-white">
+                                                                        <i class="fa fa-undo"></i> Pulihkan
+                                                                    </span>
+                                                                </button>
+                                                            </form>
+                                                        @else
+                                                            {{-- Jika barang belum dihapus, tampilkan tombol Edit & Hapus dalam satu grup --}}
+                                                            <div class="btn-group" role="group">
+                                                                <a href="{{ route('daftar-barang.edit', $daftarBarang->br_kode) }}"
+                                                                    class="btn btn-small btn-warning">
+                                                                    <i class="fa fa-edit"></i> Edit
+                                                                </a>
+                                                                <button type="button"
+                                                                    class="btn btn-small btn-danger delete-button">
                                                                     <i class="fa fa-trash"></i> Hapus
-                                                                </span></button>
-                                                        </form>
+                                                                </button>
+                                                            </div>
+                                                            <form
+                                                                action="{{ route('daftar-barang.destroy', $daftarBarang->br_kode) }}"
+                                                                method="POST" class="delete-form" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                            </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -66,9 +93,19 @@
 
     <script>
         $(document).ready(function() {
-            $('#example').DataTable(); // Ganti #example dengan ID tabel Anda
+            $('#datatable').DataTable({
+                processing: true,
+                serverSide: false,
+                searching: true, // Mengaktifkan fitur pencarian
+                paging: true, // Mengaktifkan fitur pagination
+                ordering: true, // Mengaktifkan fitur pengurutan
+                order: [
+                    [0, 'asc']
+                ] // Mengurutkan berdasarkan kolom pertama (KODE) secara ascending
+            });
         });
     </script>
+
 
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -86,10 +123,18 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        this.closest('form').submit();
+                        this.closest('td').querySelector('.delete-form').submit();
                     }
-                })
+                });
             });
         });
     </script>
+    
+    <script>
+        document.getElementById('filter-barang').addEventListener('change', function() {
+            let filter = this.value;
+            window.location.href = "{{ route('daftar-barang.index') }}?filter=" + filter;
+        });
+    </script>
+
 @endsection
