@@ -2,62 +2,116 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Gentelella Alela! | </title>
-
-    <!-- Bootstrap -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <link href="{{ asset('asset') }}/dist/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="{{ asset('asset') }}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="{{ asset('asset') }}/dist/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="{{ asset('asset') }}/dist/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <style>
+        /* Style dasar untuk halaman */
+        body {
+            background-color: #1f2d3d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    <!-- Custom Theme Style -->
-    <link href="{{ asset('asset') }}/dist/build/css/custom.min.css" rel="stylesheet">
+        /* Kotak login */
+        .login-box {
+            width: 400px;
+            height: 400px;
+            background-color: #2c3e50;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .login-box h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        /* Input group */
+        .input-group {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .input-group svg {
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+
+        .input-group input {
+            flex-grow: 1;
+            background: none;
+            border: none;
+            outline: none;
+            color: black;
+            font-size: 16px;
+            padding: 5px;
+        }
+        
+        .login-box form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Tombol Login */
+        .login-box button {
+            margin-top: 20px;
+            background-color: #1fb192;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-box button:hover {
+            background-color: #13a384;
+        }
+    </style>
 </head>
 
-<body class="login">
-    <div>
-        <a class="hiddenanchor" id="signup"></a>
-        <a class="hiddenanchor" id="signin"></a>
-
-        <div class="login_wrapper">
-            <div class="animate form login_form">
-                <section class="login_content">
-                    <form action="{{ route('login') }}" method="POST" class="user">
-                        @csrf
-                        <h1>Login User</h1>
-                        <!-- Username Input -->
-                        <div class="form-group">
-                            <input type="text" name="user_nama" class="form-control form-control-user" id="user_nama"
-                                placeholder="Enter Username" value="{{ old('user_nama') }}" required>
-                            @error('user_nama')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <!-- Password Input -->
-                        <div class="form-group mb-5">
-                            <input type="password" name="user_pass" class="form-control form-control-user"
-                                id="user_pass" placeholder="Enter Password" required>
-                            @error('user_pass')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                            Login
-                        </button>
-                    </form>
-                </section>
+<body>
+    <div class="login-box">
+        <h2>Login</h2>
+        <form action="{{ route('login') }}" method="POST">
+            @csrf
+            <div class="input-group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#2c3e50">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+                    <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
+                </svg>
+                <input type="text" name="user_nama" placeholder="Username" required>
             </div>
-        </div>
+            <div class="input-group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#2c3e50">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 2a5 5 0 0 1 5 5v3a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3v-3a5 5 0 0 1 5 -5m0 12a2 2 0 0 0 -1.995 1.85l-.005 .15a2 2 0 1 0 2 -2m0 -10a3 3 0 0 0 -3 3v3h6v-3a3 3 0 0 0 -3 -3" />
+                </svg>
+                <input type="password" name="user_pass" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
     </div>
 </body>
 

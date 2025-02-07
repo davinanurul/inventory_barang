@@ -26,9 +26,17 @@ class DaftarPeminjamanController extends Controller
 
     public function create()
     {
-        $daftarBarangs = DaftarBarang::all();
+        // Ambil daftar barang yang memiliki br_status = 1
+        $daftarBarangs = DaftarBarang::where('br_status', 1)
+            // Pastikan barang yang tidak dipinjam tidak muncul
+            ->whereDoesntHave('peminjamanBarang', function ($query) {
+                $query->where('pdb_sts', 1); // Barang tidak muncul jika sedang dipinjam (status peminjaman = 1)
+            })
+            ->get();
+
         return view('daftar-peminjaman.create', compact('daftarBarangs'));
     }
+
 
     public function store(Request $request)
     {

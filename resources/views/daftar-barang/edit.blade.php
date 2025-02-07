@@ -52,9 +52,6 @@
                                 <option value="3"
                                     {{ old('br_status', $daftarBarang->br_status) == '3' ? 'selected' : '' }}>Barang Rusak,
                                     Tidak Bisa Digunakan</option>
-                                <option value="0"
-                                    {{ old('br_status', $daftarBarang->br_status) == '0' ? 'selected' : '' }}>Barang
-                                    Dihapus dari Sistem</option>
                             </select>
                         </div>
                     </div>
