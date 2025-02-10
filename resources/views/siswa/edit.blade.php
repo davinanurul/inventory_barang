@@ -20,9 +20,10 @@
                 <div class="form-group mt-0">
                     <label for="siswa_nama">NAMA SISWA</label>
                     <input type="text" name="siswa_nama" id="siswa_nama" class="form-control" value="{{ old('siswa_nama', $daftarSiswa->siswa_nama) }}" required>
+                </div>
                 <div class="form-group mt-0">
                     <label for="siswa_kelas">KELAS</label>
-                    <input type="text" name="siswa_kelas" id="siswa_kelas" class="form-control" value="{{ old('siswa_nama', $daftarSiswa->siswa_nama) }}" required>
+                    <input type="text" name="siswa_kelas" id="siswa_kelas" class="form-control" value="{{ old('siswa_kelas', $daftarSiswa->siswa_kelas) }}" required>
                 </div>
                 <div class="text-end mt-4">
                     <button type="submit" class="btn btn-primary">Simpan</button>

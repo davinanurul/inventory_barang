@@ -22,7 +22,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">ID</th>
-                                                <th class="text-center">USER ID</th>
+                                                <th class="text-center">NAMA USER</th>
                                                 <th class="text-center">PB ID</th>
                                                 <th class="text-center">NAMA SISWA</th>
                                                 <th class="text-center">TGL KEMBALI</th>
@@ -33,7 +33,7 @@
                                             @foreach ($pengembalians as $pengembalian)
                                                 <tr>
                                                     <td>{{ $pengembalian->kembali_id }}</td>
-                                                    <td>{{ $pengembalian->user_id }}</td>
+                                                    <td>{{ $pengembalian->user->user_nama }}</td>
                                                     <td>{{ $pengembalian->pb_id }}</td>
                                                     <td>{{ $pengembalian->peminjaman->pb_nama_siswa ?? '-' }}</td>
                                                     <td>{{ $pengembalian->kembali_tgl }}</td>

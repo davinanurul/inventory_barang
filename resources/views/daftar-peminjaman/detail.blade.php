@@ -21,8 +21,8 @@
                                 <td>{{ $daftarPeminjaman->pb_id }}</td>
                             </tr>
                             <tr>
-                                <th style="width: 20%;">USER ID</th>
-                                <td>{{ $daftarPeminjaman->user_id }}</td>
+                                <th style="width: 20%;">NAMA USER</th>
+                                <td>{{ $daftarPeminjaman->user->user_nama }}</td>
                             </tr>
                             <tr>
                                 <th style="width: 20%;">NO SISWA</th>

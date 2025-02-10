@@ -29,6 +29,7 @@ class DaftarPenggunaController extends Controller
         ]);
 
         $validated['user_sts'] = 1;
+        $validated['created_at'] = now()->format('Y-m-d');
 
         $validated['user_pass'] = Hash::make($validated['user_pass']);
 

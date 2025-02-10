@@ -22,9 +22,9 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">ID</th>
-                                        <th class="text-center">NAMA</th>
-                                        <th class="text-center">PASSWORD</th>
+                                        <th class="text-center">NAMA USER</th>
                                         <th class="text-center">HAK AKSES</th>
+                                        <th class="text-center">TANGGAL DIBUAT</th>
                                         <th class="text-center">STATUS</th>
                                         <th class="text-center">AKSI</th>
                                     </tr>
@@ -34,8 +34,8 @@
                                         <tr>
                                             <td>{{ $daftarPengguna->user_id }}</td>
                                             <td>{{ $daftarPengguna->user_nama }}</td>
-                                            <td>{{ $daftarPengguna->user_pass }}</td>
                                             <td>{{ $daftarPengguna->user_hak }}</td>
+                                            <td>{{ $daftarPengguna->created_at->format('Y-m-d') }}</td>
                                             <td>{{ $daftarPengguna->user_sts ? 'Aktif' : 'Nonaktif' }}</td>
                                             <td style="width: 10%">
                                                 @if ($daftarPengguna->user_sts)

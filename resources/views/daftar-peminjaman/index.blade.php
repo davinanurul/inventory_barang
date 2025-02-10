@@ -24,7 +24,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">ID</th>
-                                                <th class="text-center">USER ID</th>
+                                                <th class="text-center">NAMA USER</th>
                                                 <th class="text-center">NO SISWA</th>
                                                 <th class="text-center">NAMA SISWA</th>
                                                 <th class="text-center">TGL PEMINJAMAN</th>
@@ -37,7 +37,7 @@
                                             @foreach ($daftarPeminjamans as $daftarPeminjaman)
                                                 <tr>
                                                     <td>{{ $daftarPeminjaman->pb_id }}</td>
-                                                    <td>{{ $daftarPeminjaman->user_id }}</td>
+                                                    <td>{{ $daftarPeminjaman->user->user_nama }}</td>
                                                     <td>{{ $daftarPeminjaman->pb_no_siswa }}</td>
                                                     <td>{{ $daftarPeminjaman->pb_nama_siswa }}</td>
                                                     <td>{{ $daftarPeminjaman->pb_tgl }}</td>
