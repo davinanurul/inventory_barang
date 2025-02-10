@@ -28,13 +28,13 @@ class DaftarPeminjamanController extends Controller
     public function create()
     {
         $daftarSiswa = Siswa::all();
-        $daftarBarangs = DaftarBarang::where('br_status', 1)// Ambil daftar barang yang memiliki br_status = 1
+        $barang = DaftarBarang::where('br_status', 1) // Ambil daftar barang yang memiliki br_status = 1
             ->whereDoesntHave('peminjamanBarang', function ($query) {
                 $query->where('pdb_sts', 1); // Barang tidak muncul jika sedang dipinjam (status peminjaman = 1)
             })
             ->get();
 
-        return view('daftar-peminjaman.create', compact('daftarSiswa', 'daftarBarangs'));
+        return view('daftar-peminjaman.create', compact('daftarSiswa', 'barang'));
     }
 
 
@@ -44,7 +44,8 @@ class DaftarPeminjamanController extends Controller
             'pb_no_siswa' => 'required|string|max:20',
             'pb_nama_siswa' => 'required|string|max:100',
             'pb_harus_kembali_tgl' => 'required|date',
-            'br_nama' => 'required',
+            'data_peminjaman' => 'required|array',
+            'data_peminjaman.*.br_kode' => 'required|string|max:20',
         ]);
 
         // Tambahkan data tambahan
@@ -57,19 +58,28 @@ class DaftarPeminjamanController extends Controller
         $validated['pb_id'] = DaftarPeminjaman::generatePbId();
 
         // Simpan data ke tabel `tm_peminjaman`
-        $peminjaman = DaftarPeminjaman::create($validated);
+        $peminjaman = DaftarPeminjaman::create([
+            'pb_id' => $validated['pb_id'],
+            'pb_no_siswa' => $validated['pb_no_siswa'],
+            'pb_nama_siswa' => $validated['pb_nama_siswa'],
+            'pb_harus_kembali_tgl' => $validated['pb_harus_kembali_tgl'],
+            'pb_stat' => 1,
+            'user_id' => Auth::id(),
+            'created_at' => now(),
+            'pb_tgl' => now(),
+        ]);
 
         // Simpan detail barang ke tabel `td_peminjaman_barang`
-        $detailPeminjaman = [
-            'pbd_id' => $validated['pb_id'] . '001', // Contoh format pbd_id (sesuaikan dengan logika no urut)
-            'pb_id' => $peminjaman->pb_id,
-            'br_kode' => $validated['br_nama'], // `br_nama` sebenarnya kode barang (br_kode)
-            'pdb_tanggal' => now(),
-            'pdb_sts' => 1,
-            'created_at' => now(),
-        ];
-
-        detailPeminjaman::create($detailPeminjaman);
+        foreach ($validated['data_peminjaman'] as $index => $item) {
+            DetailPeminjaman::create([
+                'pbd_id' => $validated['pb_id'] . str_pad($index + 1, 3, '0', STR_PAD_LEFT), // Contoh format pbd_id (pb_id + nomor urut)
+                'pb_id' => $peminjaman->pb_id,
+                'br_kode' => $item['br_kode'],
+                'pdb_tanggal' => now(),
+                'pdb_sts' => 1,
+                'created_at' => now(),
+            ]);
+        }
 
         return redirect()->route('daftar-peminjaman.index')->with('success', 'Data peminjaman berhasil dibuat.');
     }

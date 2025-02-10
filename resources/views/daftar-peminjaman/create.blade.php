@@ -16,7 +16,8 @@
                     <div class="form-group">
                         <label for="pb_nama_siswa">Nama Siswa</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="pb_nama_siswa" name="pb_nama_siswa" readonly required>
+                            <input type="text" class="form-control" id="pb_nama_siswa" name="pb_nama_siswa" readonly
+                                required>
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalsiswa">
@@ -24,38 +25,28 @@
                                 </button>
                             </div>
                         </div>
-                        <input type="text" class="form-control" id="pb_no_siswa" name="pb_no_siswa" readonly required hidden>
+                        <input type="text" class="form-control" id="pb_no_siswa" name="pb_no_siswa" readonly required
+                            hidden>
                     </div>
-                    <!-- Select Barang -->
-                    <div class="form-group">
-                        <label for="br_nama">Pilih Barang</label>
-                        <select class="form-control" id="br_nama" name="br_nama" required>
-                            <option value="">Pilih Barang</option>
-                            @foreach ($daftarBarangs as $daftarBarang)
-                                <option value="{{ $daftarBarang->br_kode }}" data-name="{{ $daftarBarang->br_nama }}">
-                                    {{ $daftarBarang->br_nama }}
-                                </option>
-                            @endforeach
-                        </select>
+
+                    <div id="dynamic-fields">
+                        <label>Data Peminjaman:</label>
+                        <div class="form-group field-group">
+                            <select name="data_peminjaman[0][br_kode]" id="br_kode" class="form-control">
+                                @foreach ($barang as $item)
+                                    <option value="{{ $item->br_kode }}">{{ $item->br_nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="addField()">Tambah Barang</button>
+
                     <div class="form-group">
                         <label for="pb_harus_kembali_tgl">Tanggal Harus Kembali</label>
                         <input type="date" name="pb_harus_kembali_tgl" id="pb_harus_kembali_tgl" class="form-control"
                             required>
                     </div>
-
-                    {{-- <!-- Tabel untuk menampilkan produk yang dipilih -->
-                    <table id="selected-products-table" class="table">
-                        <thead>
-                            <tr>
-                                <th>Nama Barang</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Baris produk yang dipilih akan ditambahkan di sini -->
-                        </tbody>
-                    </table> --}}
 
                     <div class="text-end mt-4">
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -131,52 +122,40 @@
         });
     </script>
 
-    {{-- <script>
-        // Mendapatkan elemen select dan tabel
-        const selectBarang = document.getElementById('br_nama');
-        const tableBody = document.getElementById('selected-products-table').getElementsByTagName('tbody')[0];
+    <script>
+        let fieldCount = 1;
 
-        // Fungsi untuk menambah produk ke tabel
-        function addProductToTable(selectedOption) {
-            const productCode = selectedOption.value;
-            const productName = selectedOption.getAttribute('data-name');
+        function addField() {
+            fieldCount++;
+            let fields = `
+     <div class="form-group field-group">
+         <select name="data_peminjaman[${fieldCount}][br_kode]" class="form-control">
+             @foreach ($barang as $item)
+                 <option value="{{ $item->br_kode }}">{{ $item->br_nama }}</option>
+             @endforeach
+         </select>
+     </div>
+ `;
+            document.getElementById('dynamic-fields').insertAdjacentHTML('beforeend', fields);
 
-            // Membuat baris baru untuk tabel
-            const row = tableBody.insertRow();
-
-            // Menambahkan data barang ke dalam sel tabel
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-
-            cell1.textContent = productName;
-
-            // Menambahkan tombol untuk menghapus produk
-            const removeButton = document.createElement('button');
-            removeButton.textContent = 'Hapus';
-            removeButton.classList.add('btn', 'btn-danger');
-            removeButton.type = 'button'; // Pastikan tombol bukan submit
-
-            // Debug: Pastikan tombol Hapus berfungsi
-            removeButton.onclick = function() {
-                console.log('Baris akan dihapus:', row.rowIndex); // Debug: cek apakah fungsi dijalankan
-                tableBody.deleteRow(row.rowIndex); // Hapus baris dari tabel
-            };
-
-            cell2.appendChild(removeButton);
-
-            // Menyimpan ID produk ke dalam tabel jika diperlukan untuk backend (misalnya menggunakan data produk)
-            row.setAttribute('data-product-id', productCode);
+            // Debugging: Periksa apakah data dinamis ditambahkan dengan benar
+            console.log(document.forms[0]); // Melihat form yang sedang aktif
         }
 
-        // Menambahkan event listener pada select untuk menangani pemilihan produk
-        selectBarang.addEventListener('change', function() {
-            const selectedOption = selectBarang.options[selectBarang.selectedIndex];
-            console.log('Barang terpilih:', selectedOption.value); // Debugging: cek barang yang terpilih
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const selects = document.querySelectorAll('select[name^="data_peminjaman"]');
+            let valid = true;
 
-            if (selectedOption.value) {
-                addProductToTable(selectedOption);
-                selectBarang.value = ''; // Reset pilihan select setelah dipilih
+            selects.forEach(function(select) {
+                if (!select.value) {
+                    valid = false;
+                }
+            });
+
+            if (!valid) {
+                event.preventDefault(); // Cegah submit jika ada input yang kosong
+                alert('Pastikan semua data barang telah dipilih!');
             }
         });
-    </script> --}}
+    </script>
 @endsection
