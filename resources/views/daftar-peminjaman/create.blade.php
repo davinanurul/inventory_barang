@@ -40,7 +40,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-secondary" onclick="addField()">Tambah Barang</button>
+                    <button type="button" class="btn btn-secondary mb-3" onclick="addField()">Tambah Barang</button>
 
                     <div class="form-group">
                         <label for="pb_harus_kembali_tgl">Tanggal Harus Kembali</label>
