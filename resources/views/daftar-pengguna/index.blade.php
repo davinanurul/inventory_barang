@@ -2,10 +2,6 @@
 @section('title', 'Daftar Pengguna')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
     <div class="col-md-12 col-sm-12 ">
         <div class="mb-4">
             <a href="{{ route('daftar-pengguna.create') }}" class="btn btn-primary">
@@ -42,17 +38,17 @@
                                             <td>{{ $daftarPengguna->user_sts ? 'Aktif' : 'Nonaktif' }}</td>
                                             <td style="width: 10%">
                                                 @if ($daftarPengguna->user_sts)
-                                                    <button class="btn btn-small btn-danger" 
-                                                            onclick="confirmDeactivation({{ $daftarPengguna->user_id }}, 'nonaktifkan')">
+                                                    <button class="btn btn-small btn-danger"
+                                                        onclick="confirmDeactivation({{ $daftarPengguna->user_id }}, 'nonaktifkan')">
                                                         Nonaktifkan
                                                     </button>
                                                 @else
-                                                    <button class="btn btn-small btn-success" 
-                                                            onclick="confirmDeactivation({{ $daftarPengguna->user_id }}, 'aktifkan')">
+                                                    <button class="btn btn-small btn-success"
+                                                        onclick="confirmDeactivation({{ $daftarPengguna->user_id }}, 'aktifkan')">
                                                         Aktifkan
                                                     </button>
                                                 @endif
-                                            </td>                                                                                                                                
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -65,9 +61,27 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: {!! json_encode(session('success')) !!}
+                });
+            @endif
+
+            @if (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: {!! json_encode(session('error')) !!}
+                });
+            @endif
+        });
+        
         function confirmDeactivation(userId, action) {
             let title, text, confirmButtonText;
-    
+
             if (action === 'nonaktifkan') {
                 title = 'Konfirmasi';
                 text = 'Apakah Anda yakin ingin menonaktifkan akun ini?';
@@ -77,7 +91,7 @@
                 text = 'Apakah Anda yakin ingin mengaktifkan akun ini?';
                 confirmButtonText = 'Ya, Aktifkan';
             }
-    
+
             Swal.fire({
                 title: title,
                 text: text,
@@ -97,5 +111,5 @@
                 }
             });
         }
-    </script>     
+    </script>
 @endsection

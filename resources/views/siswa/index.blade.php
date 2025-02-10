@@ -1,16 +1,16 @@
 @extends('layouts.layout')
-@section('title', 'Jenis Barang')
+@section('title', 'Data Siswa')
 
 @section('content')
     <div class="col-md-12 col-sm-12 ">
         <div class="mb-4">
-            <a href="{{ route('jenis-barang.create') }}" class="btn btn-primary">
-                Tambah Jenis Barang
+            <a href="{{ route('siswa.create') }}" class="btn btn-primary">
+                Tambah Data Siswa
             </a>
         </div>
         <div class="x_panel">
             <div class="x_title">
-                <h2>Tabel Jenis Barang</h2>
+                <h2>Tabel Daftar Siswa</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -20,37 +20,30 @@
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">KODE</th>
-                                        <th class="text-center">JENIS BARANG</th>
+                                        <th class="text-center">NOMOR SISWA</th>
+                                        <th class="text-center">NAMA SISWA</th>
+                                        <th class="text-center">KELAS</th>
                                         <th class="text-center">AKSI</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($jenisBarangs as $jenisBarang)
+                                    @forelse ($daftarSiswa as $siswa)
                                         <tr>
-                                            <td>{{ $jenisBarang->jns_brg_kode }}</td>
-                                            <td>{{ $jenisBarang->jns_brg_nama }}</td>
+                                            <td>{{ $siswa->siswa_kode }}</td>
+                                            <td>{{ $siswa->siswa_nama }}</td>
+                                            <td>{{ $siswa->siswa_kelas }}</td>
                                             <td class="text-center" style="width: 12%">
-                                                <a href="{{ route('jenis-barang.edit', $jenisBarang->jns_brg_kode) }}"
+                                                <a href="{{ route('siswa.edit', $siswa->siswa_kode) }}"
                                                     class="btn btn-small btn-warning">
                                                     <span class="icon text-white">
                                                         <i class="fa fa-edit"></i>
                                                     </span>Edit</a>
-                                                {{-- <form action="{{ route('jenis-barang.destroy', $jenisBarang->jns_brg_kode) }}"
-                                                        method="POST" style="display:inline;" class="delete-form">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="btn btn-small btn-danger delete-button">
-                                                            <span class="icon text-white">
-                                                                <i class="fa fa-trash"></i> Hapus
-                                                            </span></button>
-                                                    </form> --}}
                                             </td>
                                         </tr>
                                     @empty
-                                        <tr>
-                                            <td colspan="6" class="text-center">Tidak ada data untuk tabel ini.</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="6" class="text-center">Tidak ada data untuk tabel ini.</td>
+                                    </tr>
                                     @endforelse
                                 </tbody>
                             </table>

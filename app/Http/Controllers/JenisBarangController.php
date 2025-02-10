@@ -49,7 +49,7 @@ class JenisBarangController extends Controller
             'jns_brg_nama' => $validated['jns_brg_nama'],
         ]);
 
-        return redirect()->route('jenis-barang.index')->with('success', 'Jenis Barang berhasil ditambahkan');
+        return redirect()->route('jenis-barang.index')->with('success', 'Data berhasil di tambahkan.');
     }
 
     public function edit($id)
@@ -67,7 +67,7 @@ class JenisBarangController extends Controller
         $jenisBarang = JenisBarang::findOrFail($id);
         $jenisBarang->update($validated);
 
-        return redirect()->route('jenis-barang.index')->with('success', 'Jenis Barang berhasil diperbarui');
+        return redirect()->route('jenis-barang.index')->with('success', 'Data berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -75,6 +75,6 @@ class JenisBarangController extends Controller
         $jenisBarang = JenisBarang::findOrFail($id);
         $jenisBarang->delete();
 
-        return redirect()->route('jenis-barang.index')->with('success', 'Jenis Barang berhasil dihapus');
+        return redirect()->route('jenis-barang.index')->with('success', 'Data berhasil dihapus');
     }
 }

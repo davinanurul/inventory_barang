@@ -43,7 +43,7 @@ class DaftarPenggunaController extends Controller
         $user->user_sts = false;
         $user->save();
 
-        return redirect()->route('daftar-pengguna.index')->with('success', 'Akun berhasil dinonaktifkan');
+        return redirect()->route('daftar-pengguna.index')->with('success', 'Pengguna berhasil dinonaktifkan');
     }
 
     public function aktifkanAkun($userId)
@@ -52,6 +52,6 @@ class DaftarPenggunaController extends Controller
         $user->user_sts = true;
         $user->save();
 
-        return redirect()->route('daftar-pengguna.index')->with('success', 'Akun berhasil diaktifkan');
+        return redirect()->route('daftar-pengguna.index')->with('success', 'Pengguna berhasil diaktifkan');
     }
 }

@@ -81,6 +81,24 @@
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: {!! json_encode(session('success')) !!}
+                });
+            @endif
+
+            @if (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: {!! json_encode(session('error')) !!}
+                });
+            @endif
+        });
+        
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', function() {
                 Swal.fire({

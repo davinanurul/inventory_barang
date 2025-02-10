@@ -10,6 +10,7 @@ use App\Http\Controllers\LaporanPengembalianController;
 use App\Http\Controllers\LaporanStatusBarangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengembalianController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 // Middleware auth untuk melindungi dashboard dan rute lainnya
@@ -59,6 +60,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('laporan-pengembalian', [LaporanPengembalianController::class, 'laporanPengembalianBarang'])->name('laporan-pengembalian-barang');
     Route::get('laporan-status-barang', [LaporanStatusBarangController::class, 'laporanStatusBarang'])->name('laporan-status-barang');
 
+    // Route Siswa
+    Route::get('siswa', [SiswaController::class, 'index'])->name('siswa.index');
+    Route::get('siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
+    Route::post('siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
+    Route::get('siswa/{siswa_kode}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
+    Route::put('siswa/{siswa_kode}/update', [SiswaController::class, 'update'])->name('siswa.update');
 });
 
 // Route untuk Login

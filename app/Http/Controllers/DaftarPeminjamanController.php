@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DaftarBarang;
 use App\Models\DaftarPeminjaman;
 use App\Models\detailPeminjaman;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,15 +27,14 @@ class DaftarPeminjamanController extends Controller
 
     public function create()
     {
-        // Ambil daftar barang yang memiliki br_status = 1
-        $daftarBarangs = DaftarBarang::where('br_status', 1)
-            // Pastikan barang yang tidak dipinjam tidak muncul
+        $daftarSiswa = Siswa::all();
+        $daftarBarangs = DaftarBarang::where('br_status', 1)// Ambil daftar barang yang memiliki br_status = 1
             ->whereDoesntHave('peminjamanBarang', function ($query) {
                 $query->where('pdb_sts', 1); // Barang tidak muncul jika sedang dipinjam (status peminjaman = 1)
             })
             ->get();
 
-        return view('daftar-peminjaman.create', compact('daftarBarangs'));
+        return view('daftar-peminjaman.create', compact('daftarSiswa', 'daftarBarangs'));
     }
 
 
@@ -71,7 +71,7 @@ class DaftarPeminjamanController extends Controller
 
         detailPeminjaman::create($detailPeminjaman);
 
-        return redirect()->route('daftar-peminjaman.index')->with('success', 'Data peminjaman berhasil ditambahkan.');
+        return redirect()->route('daftar-peminjaman.index')->with('success', 'Data peminjaman berhasil dibuat.');
     }
 
     public function edit($id)

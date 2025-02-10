@@ -119,6 +119,7 @@
                                         <ul class="nav child_menu">
                                             <li><a href="{{ route('jenis-barang.index') }}">Jenis Barang</a></li>
                                             <li><a href="{{ route('daftar-pengguna.index') }}">Daftar Pengguna</a></li>
+                                            <li><a href="{{ route('siswa.index') }}">Daftar Siswa</a></li>
                                         </ul>
                                     </li>
                                 @endif

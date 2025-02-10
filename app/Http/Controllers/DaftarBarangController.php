@@ -12,14 +12,14 @@ class DaftarBarangController extends Controller
 {
     public function index(Request $request)
     {
-        $filter = $request->input('filter', 'active'); // Default filter menampilkan barang yang tidak dihapus
+        $filter = $request->input('filter', 'active'); 
 
         if ($filter === 'deleted') {
-            $daftarBarangs = DaftarBarang::onlyTrashed()->get(); // Menampilkan hanya barang yang sudah dihapus
+            $daftarBarangs = DaftarBarang::onlyTrashed()->get();
         } elseif ($filter === 'all') {
-            $daftarBarangs = DaftarBarang::withTrashed()->get(); // Menampilkan semua barang (termasuk yang dihapus)
+            $daftarBarangs = DaftarBarang::withTrashed()->get();
         } else {
-            $daftarBarangs = DaftarBarang::all(); // Default: hanya menampilkan barang yang tidak dihapus
+            $daftarBarangs = DaftarBarang::all();
         }
 
         return view('daftar-barang.index', compact('daftarBarangs', 'filter'));
@@ -50,7 +50,7 @@ class DaftarBarangController extends Controller
         // Simpan ke database
         DaftarBarang::create($validated);
 
-        return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil ditambahkan.');
+        return redirect()->route('daftar-barang.index')->with('success', 'Data Barang berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -78,14 +78,23 @@ class DaftarBarangController extends Controller
             'br_status' => $validated['br_status'],
         ]);
 
-        return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil diperbarui.');
+        return redirect()->route('daftar-barang.index')->with('success', 'Data barang berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $barang = DaftarBarang::findOrFail($id);
 
-        // Periksa apakah barang ini pernah dipinjam
+        // Periksa apakah barang ini sedang dipinjam (pdb_sts = 1)
+        $sedangDipinjam = DetailPeminjaman::where('br_kode', $barang->br_kode)
+            ->where('pdb_sts', 1)
+            ->exists();
+
+        if ($sedangDipinjam) {
+            return redirect()->back()->with('error', 'Barang sedang dipinjam.');
+        }
+
+        // Periksa apakah barang ini pernah dipinjam sebelumnya
         $pernahDipinjam = DetailPeminjaman::where('br_kode', $barang->br_kode)->exists();
 
         if ($pernahDipinjam) {
@@ -95,23 +104,24 @@ class DaftarBarangController extends Controller
 
             // Soft delete
             $barang->delete();
+
+            return redirect()->back()->with('success', 'Barang telah dihapus.');
         } else {
             // Jika belum pernah dipinjam, lakukan hard delete
             $barang->forceDelete();
+
+            return redirect()->back()->with('success', 'Barang telah dihapus permanen.');
         }
-
-        return redirect()->back()->with('success', 'Data berhasil dihapus.');
     }
-
 
     public function restore($id)
     {
         $daftarBarang = DaftarBarang::withTrashed()->findOrFail($id);
         $daftarBarang->restore();
-        
+
         $daftarBarang->br_status = 1;
         $daftarBarang->save();
-        
+
         return redirect()->route('daftar-barang.index')->with('success', 'Barang berhasil dipulihkan.');
     }
 

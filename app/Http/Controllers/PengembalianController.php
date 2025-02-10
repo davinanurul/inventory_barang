@@ -21,11 +21,11 @@ class PengembalianController extends Controller
 
     public function create(Request $request)
     {
-        $peminjaman = DaftarPeminjaman::all();
-        $barangPinjaman = DetailPeminjaman::with('barangInventaris')
-            ->get();
         $selectedPbId = $request->pb_id;
-        return view('pengembalian.create', compact('peminjaman', 'barangPinjaman', 'selectedPbId'));
+        $peminjaman = DaftarPeminjaman::with('detailPeminjaman.barangInventaris')
+            ->where('pb_id', $selectedPbId)
+            ->first();
+        return view('pengembalian.create', compact('peminjaman', 'selectedPbId'));
     }
 
 
@@ -57,7 +57,7 @@ class PengembalianController extends Controller
             ->where('pb_id', $request->pb_id)
             ->update(['pb_stat' => 0]);
 
-        return redirect()->route('pengembalian.index')->with('success', 'Barang berhasil dikembalikan.');
+        return redirect()->route('pengembalian.index')->with('success', 'Pengembalian berhasil.');
     }
 
 

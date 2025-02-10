@@ -52,7 +52,8 @@
                                                                 method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('PATCH')
-                                                                <button type="submit" class="btn btn-small btn-primary restore-button w-100">
+                                                                <button type="submit"
+                                                                    class="btn btn-small btn-primary restore-button w-100">
                                                                     <span class="icon text-white">
                                                                         <i class="fa fa-undo"></i> Pulihkan
                                                                     </span>
@@ -106,7 +107,6 @@
         });
     </script>
 
-
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -114,7 +114,7 @@
             let filter = this.value;
             window.location.href = "{{ route('daftar-barang.index') }}?filter=" + filter;
         });
-        
+
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', function() {
                 Swal.fire({
@@ -153,6 +153,24 @@
                     }
                 });
             });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: {!! json_encode(session('success')) !!}
+                });
+            @endif
+
+            @if (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: {!! json_encode(session('error')) !!}
+                });
+            @endif
         });
     </script>
 @endsection

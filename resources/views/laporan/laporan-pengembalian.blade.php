@@ -41,7 +41,7 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="6" class="text-center">Tidak ada data barang tersedia.
+                                                    <td colspan="6" class="text-center">Tidak ada data untuk tabel ini.
                                                     </td>
                                                 </tr>
                                             @endforelse
