@@ -12,7 +12,7 @@ class DaftarPeminjaman extends Model
     protected $table = 'tm_peminjaman';
 
     protected $primaryKey = 'pb_id';
-    public $incrementing = false; 
+    public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
@@ -26,7 +26,7 @@ class DaftarPeminjaman extends Model
     ];
 
     protected $attributes = [
-        'pb_stat' => '1', 
+        'pb_stat' => '1',
     ];
 
     public static function generatePbId()
@@ -71,6 +71,6 @@ class DaftarPeminjaman extends Model
 
     public function detailPeminjaman()
     {
-        return $this->hasOne(DetailPeminjaman::class, 'pb_id', 'pb_id');
+        return $this->hasMany(DetailPeminjaman::class, 'pb_id', 'pb_id');
     }
 }

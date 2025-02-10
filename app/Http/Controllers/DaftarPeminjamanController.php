@@ -13,15 +13,7 @@ class DaftarPeminjamanController extends Controller
 {
     public function index()
     {
-        $daftarPeminjamans = DaftarPeminjaman::with(['detailPeminjaman' => function ($query) {
-            $query->select('pb_id', 'pdb_sts');
-        }])
-            ->leftJoin('td_peminjaman_barang', 'tm_peminjaman.pb_id', '=', 'td_peminjaman_barang.pb_id')
-            ->orderByRaw('COALESCE(td_peminjaman_barang.pdb_sts, 0) DESC') // Prioritas pdb_sts == 1
-            ->orderBy('tm_peminjaman.pb_tgl', 'DESC') // Urutkan dari terbaru ke terlama
-            ->select('tm_peminjaman.*')
-            ->get();
-
+        $daftarPeminjamans = DaftarPeminjaman::all();
         return view('daftar-peminjaman.index', compact('daftarPeminjamans'));
     }
 
@@ -108,10 +100,7 @@ class DaftarPeminjamanController extends Controller
 
     public function detail($id)
     {
-        $daftarPeminjaman = DaftarPeminjaman::findOrFail($id);
-        $detailPeminjaman = DetailPeminjaman::with('barangInventaris')->where('pb_id', $id)->get();
-        $daftarBarangs = DaftarBarang::all();
-
-        return view('daftar-peminjaman.detail', compact('daftarPeminjaman', 'detailPeminjaman', 'daftarBarangs'));
-    }
+        $daftarPeminjaman = DaftarPeminjaman::with('detailPeminjaman.barangInventaris')->findOrFail($id);
+        return view('daftar-peminjaman.detail', compact('daftarPeminjaman'));
+    }    
 }

@@ -18,13 +18,19 @@
                                 value="{{ old('pb_id', $selectedPbId ?? '') }}" readonly required>
                         </div>
                     </div>
-                    <!-- Input Peminjaman -->
+                    <!-- Daftar Nama Barang -->
                     <div class="form-group">
                         <label for="peminjaman">Nama Barang</label>
                         <div class="input-group">
-                            <input type="text" class="form-control"
-                                value="{{ $peminjaman->detailPeminjaman->barangInventaris->br_nama ?? '-' }}"
-                                disabled>
+                            <ul class="list-group w-100">
+                                @forelse ($peminjaman->detailPeminjaman as $detail)
+                                    <li class="list-group-item">
+                                        {{ $detail->barangInventaris->br_nama ?? '-' }}
+                                    </li>
+                                @empty
+                                    <li class="list-group-item text-muted">Tidak ada barang yang dipinjam</li>
+                                @endforelse
+                            </ul>
                         </div>
                     </div>
                     <!-- Status Barang -->

@@ -39,7 +39,13 @@
                             </tr>
                             <tr>
                                 <th style="width: 20%;">NAMA BARANG</th>
-                                <td colspan="3">{{ $daftarPeminjaman->detailPeminjaman->barangInventaris->br_nama }}</td>
+                                <td colspan="3">
+                                    @foreach ($daftarPeminjaman->detailPeminjaman as $detail)
+                                        <ul>
+                                            <li>{{ $detail->barangInventaris->br_nama }}</li>
+                                        </ul>
+                                    @endforeach
+                                </td>
                             </tr>
                         </tbody>
                     </table>

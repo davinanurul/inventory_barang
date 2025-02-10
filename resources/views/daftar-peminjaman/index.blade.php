@@ -40,12 +40,16 @@
                                                     <td>{{ $daftarPeminjaman->status_peminjaman }}</td>
                                                     <td class="text-center">
                                                         <div class="btn-group w-100">
-                                                            @if ($daftarPeminjaman->detailPeminjaman && $daftarPeminjaman->detailPeminjaman->pdb_sts == 0)
+                                                            @php
+                                                                $firstDetail = $daftarPeminjaman->detailPeminjaman->first();
+                                                            @endphp
+                                                    
+                                                            @if ($firstDetail && $firstDetail->pdb_sts == 0)
                                                                 <a href="{{ route('daftar-peminjaman.detail', $daftarPeminjaman->pb_id) }}"
                                                                     class="btn btn-small btn-success w-100" title="Detail">
                                                                     <span class="icon text-white">Detail</span>
                                                                 </a>
-                                                            @elseif ($daftarPeminjaman->detailPeminjaman && $daftarPeminjaman->detailPeminjaman->pdb_sts == 1)
+                                                            @elseif ($firstDetail && $firstDetail->pdb_sts == 1)
                                                                 <div class="btn-group w-100">
                                                                     <a href="{{ route('daftar-peminjaman.detail', $daftarPeminjaman->pb_id) }}"
                                                                         class="btn btn-small btn-success" title="Detail">
@@ -53,12 +57,12 @@
                                                                     </a>
                                                                     <a href="{{ route('pengembalian.create', ['pb_id' => $daftarPeminjaman->pb_id]) }}" 
                                                                         class="btn btn-small btn-warning" title="Kembali">
-                                                                         <span class="icon text-white">Kembali</span>
-                                                                     </a>
+                                                                        <span class="icon text-white">Kembali</span>
+                                                                    </a>
                                                                 </div>
                                                             @endif
                                                         </div>
-                                                    </td>
+                                                    </td>                                                    
                                                 </tr>
                                             @endforeach
                                         </tbody>

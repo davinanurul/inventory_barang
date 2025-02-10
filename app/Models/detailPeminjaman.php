@@ -59,6 +59,6 @@ class DetailPeminjaman extends Model
 
     public function barangInventaris()
     {
-        return $this->belongsTo(DaftarBarang::class, 'br_kode', 'br_kode')->withTrashed();
+        return $this->belongsTo(DaftarBarang::class, 'br_kode', 'br_kode');
     }
 }
