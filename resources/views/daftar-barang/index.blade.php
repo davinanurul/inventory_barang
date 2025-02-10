@@ -5,7 +5,7 @@
     <div class="container">
         <div class="page-body">
             <div class="col-md-12 col-sm-12 ">
-                <div class="row mb-3">
+                <div class="row mb-3 d-flex justify-content-between">
                     <div class="col-md-3">
                         <select id="filter-barang" class="form-control">
                             <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Barang Aktif</option>
@@ -13,6 +13,7 @@
                             <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>Semua Barang</option>
                         </select>
                     </div>
+                    <button class="btn btn-primary" onclick="window.print();"><i class="fa fa-print"></i> Print/Ekspor</button>
                 </div>
                 <div class="x_panel">
                     <div class="x_title">
@@ -23,7 +24,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                    <table id="datatable-responsive" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">KODE</th>

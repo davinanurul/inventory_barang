@@ -7,7 +7,10 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Detail Peminjaman Barang</h6>
+                <div class="d-flex justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Detail Peminjaman Barang</h6>
+                    <button class="btn btn-primary" onclick="window.print();"><i class="fa fa-print"></i> Print/Ekspor</button>
+                </div>   
             </div>
             <div class="card">
                 <div class="card-body">

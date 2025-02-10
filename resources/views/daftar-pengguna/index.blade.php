@@ -3,10 +3,11 @@
 
 @section('content')
     <div class="col-md-12 col-sm-12 ">
-        <div class="mb-4">
+        <div class="d-flex justify-content-between mb-3">
             <a href="{{ route('daftar-pengguna.create') }}" class="btn btn-primary">
-                Tambah Pengguna
-            </a>
+            Tambah Pengguna
+        </a><div></div> <!-- Placeholder jika diperlukan konten di kiri -->
+            <button class="btn btn-primary" onclick="window.print();"><i class="fa fa-print"></i> Print/Ekspor</button>
         </div>
         <div class="x_panel">
             <div class="x_title">
@@ -17,7 +18,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card-box table-responsive">
-                            <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                            <table id="datatable-responsive" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th class="text-center">ID</th>

@@ -5,7 +5,12 @@
     <div class="container">
         <div class="page-body">
             <div class="col-md-12 col-sm-12 ">
-                <a href="{{ route('daftar-peminjaman.create') }}" class="btn btn-primary mb-3">Buat Peminjaman</a>
+                <div class="mb-4 d-flex justify-content-between">
+                    <a href="{{ route('daftar-peminjaman.create') }}" class="btn btn-primary">
+                        Buat Peminjaman
+                    </a>
+                    <button class="btn btn-primary" onclick="window.print();"><i class="fa fa-print"></i> Print/Ekspor</button>
+                </div>
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Daftar Peminjaman</h2>
@@ -15,7 +20,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                    <table id="datatable-responsive" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">ID</th>

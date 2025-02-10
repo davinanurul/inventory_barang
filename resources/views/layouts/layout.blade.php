@@ -11,6 +11,7 @@
     <title>Inventory Barang | @yield('title')</title>
 
     <!-- Bootstrap -->
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="{{ asset('asset') }}/dist/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{ asset('asset') }}/dist/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -29,10 +30,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <!-- Bootstrap Bundle JS (Termasuk Popper.js) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- Datatables -->
+    
+    <link href="{{ asset('asset') }}/dist/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('asset') }}/dist/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('asset') }}/dist/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('asset') }}/dist/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('asset') }}/dist/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <style>
         #menu_toggle {
@@ -127,22 +131,6 @@
                         </div>
                     </div>
                     <!-- /sidebar menu -->
-
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
                     <!-- /menu footer buttons -->
                 </div>
             </div>
@@ -298,8 +286,23 @@
     <!-- NProgress -->
     <script src="{{ asset('asset') }}/dist/vendors/nprogress/nprogress.js"></script>
     <!-- jQuery custom content scroller -->
-    <script src="{{ asset('asset') }}/dist/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js">
-    </script>
+    <script src="{{ asset('asset') }}/dist/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Datatables -->
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="{{ asset('asset') }}/dist/vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('asset') }}/dist/build/js/custom.min.js"></script>
